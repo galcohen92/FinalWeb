@@ -39,6 +39,10 @@ namespace RecipeSite.Models
         public String email { get; set; }
 
         public int MyProperty { get; set; }
-        
+
+        public User()
+        {
+
+        }        
     }
 }

@@ -31,5 +31,10 @@ namespace RecipeSite.Models
 
         [Required]
         public AmountType amountType { get; set; }
+
+        public Ingredient()
+        {
+
+        }
     }
 }

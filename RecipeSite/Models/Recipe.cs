@@ -35,8 +35,8 @@ namespace RecipeSite.Models
         [Required]
         public String content { get; set; }
 
-        [DataType(DataType.Upload)]
-        public HttpPostedFileBase video { get; set; }
+        //[DataType(DataType.Upload)]
+        //public HttpPostedFileBase video { get; set; }
 
         [Required]
         public int likeAmount { get; set; }
@@ -48,5 +48,10 @@ namespace RecipeSite.Models
         public IEnumerable<CATEGORY> categories { get; set; }
 
         public virtual User author { get; set; }
+
+        public Recipe()
+        {
+
+        }
     }
 }
