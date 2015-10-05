@@ -48,7 +48,7 @@ namespace RecipeSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,userId,title,content,likeAmount")] Recipe recipe)
+        public ActionResult Create([Bind(Include = "ID,userId,title,content,video,likeAmount")] Recipe recipe)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace RecipeSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,userId,title,content,likeAmount")] Recipe recipe)
+        public ActionResult Edit([Bind(Include = "ID,userId,title,content,video,likeAmount")] Recipe recipe)
         {
             if (ModelState.IsValid)
             {

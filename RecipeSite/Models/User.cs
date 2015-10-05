@@ -6,7 +6,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RecipeSite.Models
 {
-    public class User
+    //public class User : ApplicationUser
+    public class User 
     {
         public int ID { get; set; }
 
@@ -38,7 +39,7 @@ namespace RecipeSite.Models
         [Required]
         public String email { get; set; }
 
-        public int MyProperty { get; set; }
+        public virtual List<Recipe> userRecipes { get; set; }
 
         public User()
         {

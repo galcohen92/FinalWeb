@@ -20,7 +20,7 @@ namespace RecipeSite.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("RecipeSiteContext", throwIfV1Schema: false)
         {
         }
 

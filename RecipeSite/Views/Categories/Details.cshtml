@@ -1,4 +1,4 @@
-﻿@model RecipeSite.Models.Ingredient
+﻿@model RecipeSite.Models.Category
 
 @{
     Layout = null;
@@ -13,7 +13,7 @@
 </head>
 <body>
     <div>
-        <h4>Ingredient</h4>
+        <h4>Category</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
@@ -25,19 +25,11 @@
             </dd>
     
             <dt>
-                @Html.DisplayNameFor(model => model.amount)
+                @Html.DisplayNameFor(model => model.imageUrl)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.amount)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.amountType)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.amountType)
+                @Html.DisplayFor(model => model.imageUrl)
             </dd>
     
         </dl>
