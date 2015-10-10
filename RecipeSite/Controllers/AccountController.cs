@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using RecipeSite.Models;
+using RecipeSite.DAL;
 
 namespace RecipeSite.Controllers
 {
@@ -18,9 +19,18 @@ namespace RecipeSite.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
+         private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
+        }
+
+        [Authorize(Roles = "admin")]
+        // GET: Recipes
+        public ActionResult Index()
+        {
+
+            return View(db.Users.ToList());
         }
 
         public AccountController(ApplicationUserManager userManager)
@@ -91,8 +101,10 @@ namespace RecipeSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, FirstName = model.firstName, LastName = model.firstName, 
-                BirthDate = model.birthDate, Country = model.country, City = model.city, Address = model.address};
+                var user = new ApplicationUser()
+                {
+                    Email = model.Email, UserName = model.UserName,BirthDate = model.birthDate,
+                    Country = model.country, City = model.city, Address = model.address};
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

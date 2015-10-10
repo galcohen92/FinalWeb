@@ -72,15 +72,15 @@ namespace RecipeSite.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Display(Name = "first name")]
+        [Display(Name = "user name")]
         [Required]
         [StringLength(15)]
-        public String firstName { get; set; }
+        public String UserName { get; set; }
 
-        [Display(Name = "last name")]
-        [Required]
-        [StringLength(15)]
-        public String lastName { get; set; }
+        //[Display(Name = "last name")]
+        //[Required]
+        //[StringLength(15)]
+        //public String lastName { get; set; }
 
         [Display(Name = "birthday")]
         [DataType(DataType.Date)]

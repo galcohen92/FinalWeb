@@ -14,12 +14,14 @@ namespace RecipeSite.Models
         //[Display(Name = "first name")]
         //[Required]
         //[StringLength(15)]
-        public String FirstName { get; set; }
+        //public String FirstName { get; set; }
 
         //[Display(Name = "last name")]
         //[Required]
         //[StringLength(15)]
-        public String LastName { get; set; }
+        //public String LastName { get; set; }
+
+        public String UserName { get; set; }
 
         //[Display(Name = "birthday")]
         //[DataType(DataType.Date)]

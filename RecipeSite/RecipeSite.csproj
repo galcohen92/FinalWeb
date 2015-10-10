@@ -166,29 +166,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510100511550_Init.cs" />
-    <Compile Include="Migrations\201510100511550_Init.Designer.cs">
-      <DependentUpon>201510100511550_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510100706335_Init2.cs" />
-    <Compile Include="Migrations\201510100706335_Init2.Designer.cs">
-      <DependentUpon>201510100706335_Init2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510100933380_Init3.cs" />
-    <Compile Include="Migrations\201510100933380_Init3.Designer.cs">
-      <DependentUpon>201510100933380_Init3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510100939462_Init4.cs" />
-    <Compile Include="Migrations\201510100939462_Init4.Designer.cs">
-      <DependentUpon>201510100939462_Init4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510100940500_Init41.cs" />
-    <Compile Include="Migrations\201510100940500_Init41.Designer.cs">
-      <DependentUpon>201510100940500_Init41.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510100941261_Init42.cs" />
-    <Compile Include="Migrations\201510100941261_Init42.Designer.cs">
-      <DependentUpon>201510100941261_Init42.cs</DependentUpon>
+    <Compile Include="Migrations\201510101234572_Init.cs" />
+    <Compile Include="Migrations\201510101234572_Init.Designer.cs">
+      <DependentUpon>201510101234572_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -275,6 +255,7 @@
     <Content Include="Views\Categories\Details.cshtml" />
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -285,23 +266,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510100511550_Init.resx">
-      <DependentUpon>201510100511550_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510100706335_Init2.resx">
-      <DependentUpon>201510100706335_Init2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510100933380_Init3.resx">
-      <DependentUpon>201510100933380_Init3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510100939462_Init4.resx">
-      <DependentUpon>201510100939462_Init4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510100940500_Init41.resx">
-      <DependentUpon>201510100940500_Init41.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510100941261_Init42.resx">
-      <DependentUpon>201510100941261_Init42.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510101234572_Init.resx">
+      <DependentUpon>201510101234572_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
