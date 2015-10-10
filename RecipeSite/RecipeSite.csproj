@@ -162,7 +162,6 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RecipesController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DAL\ApplicationDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
