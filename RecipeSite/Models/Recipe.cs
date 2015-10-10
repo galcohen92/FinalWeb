@@ -30,7 +30,7 @@ namespace RecipeSite.Models
         //public IEnumerable<Ingredient> ingredients { get; set; }
 
 
-        public IEnumerable<Category> categories { get; set; }
+        //public virtual IEnumerable<Category> categories { get; set; }
 
         public virtual ApplicationUser author { get; set; }
 

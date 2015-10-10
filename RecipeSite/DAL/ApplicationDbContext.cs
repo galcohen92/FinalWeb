@@ -22,13 +22,15 @@ namespace RecipeSite.DAL
         //public System.Data.Entity.DbSet<RecipeSite.Models.Ingredient> Ingredients { get; set; }
        // public System.Data.Entity.DbSet<RecipeSite.Models.User> Users { get; set; }
         public System.Data.Entity.DbSet<RecipeSite.Models.Category> Categories { get; set; }
+        public System.Data.Entity.DbSet<RecipeSite.Models.Categorization> Categorizations { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<ApplicationUser>().HasKey<string>(a => a.Id);
-
+            //modelBuilder.Entity<ApplicationUser>().HasKey<string>(a => a.Id);
+            //modelBuilder.Entity<Recipe>().HasKey(r => r.ID).HasMany(r => r.categories);
+            //modelBuilder.Entity<Category>().HasKey(c => c.ID);
         //    modelBuilder.Entity<IdentityUserLogin>().HasKey<string>(l => l.UserId);
         //    modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id);
         //    modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId });

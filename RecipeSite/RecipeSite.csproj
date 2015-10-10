@@ -175,9 +175,26 @@
     <Compile Include="Migrations\201510100706335_Init2.Designer.cs">
       <DependentUpon>201510100706335_Init2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510100933380_Init3.cs" />
+    <Compile Include="Migrations\201510100933380_Init3.Designer.cs">
+      <DependentUpon>201510100933380_Init3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510100939462_Init4.cs" />
+    <Compile Include="Migrations\201510100939462_Init4.Designer.cs">
+      <DependentUpon>201510100939462_Init4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510100940500_Init41.cs" />
+    <Compile Include="Migrations\201510100940500_Init41.Designer.cs">
+      <DependentUpon>201510100940500_Init41.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510100941261_Init42.cs" />
+    <Compile Include="Migrations\201510100941261_Init42.Designer.cs">
+      <DependentUpon>201510100941261_Init42.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Categorization.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryView.cs" />
     <Compile Include="Models\Ingredient.cs" />
@@ -274,6 +291,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510100706335_Init2.resx">
       <DependentUpon>201510100706335_Init2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510100933380_Init3.resx">
+      <DependentUpon>201510100933380_Init3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510100939462_Init4.resx">
+      <DependentUpon>201510100939462_Init4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510100940500_Init41.resx">
+      <DependentUpon>201510100940500_Init41.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510100941261_Init42.resx">
+      <DependentUpon>201510100941261_Init42.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
