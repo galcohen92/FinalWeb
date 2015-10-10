@@ -163,31 +163,26 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RecipesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="DAL\ApplicationDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510041018044_Init.cs" />
-    <Compile Include="Migrations\201510041018044_Init.Designer.cs">
-      <DependentUpon>201510041018044_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201510100511550_Init.cs" />
+    <Compile Include="Migrations\201510100511550_Init.Designer.cs">
+      <DependentUpon>201510100511550_Init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510041038448_Init1.cs" />
-    <Compile Include="Migrations\201510041038448_Init1.Designer.cs">
-      <DependentUpon>201510041038448_Init1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201510051742398_recipe1.cs" />
-    <Compile Include="Migrations\201510051742398_recipe1.Designer.cs">
-      <DependentUpon>201510051742398_recipe1.cs</DependentUpon>
+    <Compile Include="Migrations\201510100706335_Init2.cs" />
+    <Compile Include="Migrations\201510100706335_Init2.Designer.cs">
+      <DependentUpon>201510100706335_Init2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryView.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\Recipe.cs" />
-    <Compile Include="DAL\RecipeSiteContext.cs" />
     <Compile Include="Models\RecipeView.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -274,14 +269,11 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510041018044_Init.resx">
-      <DependentUpon>201510041018044_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510100511550_Init.resx">
+      <DependentUpon>201510100511550_Init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510041038448_Init1.resx">
-      <DependentUpon>201510041038448_Init1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201510051742398_recipe1.resx">
-      <DependentUpon>201510051742398_recipe1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510100706335_Init2.resx">
+      <DependentUpon>201510100706335_Init2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

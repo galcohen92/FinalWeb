@@ -13,7 +13,7 @@ namespace RecipeSite.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201510041018044_Init"; }
+            get { return "201510100511550_Init"; }
         }
         
         string IMigrationMetadata.Source
