@@ -21,7 +21,7 @@ namespace RecipeSite.Models
         //[StringLength(15)]
         //public String LastName { get; set; }
 
-        public String UserName { get; set; }
+        //public String UserName { get; set; }
 
         //[Display(Name = "birthday")]
         //[DataType(DataType.Date)]

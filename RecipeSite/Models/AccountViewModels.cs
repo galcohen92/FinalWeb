@@ -41,9 +41,9 @@ namespace RecipeSite.Models
     public class LoginViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        //[EmailAddress]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -72,7 +72,7 @@ namespace RecipeSite.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Display(Name = "user name")]
+        [Display(Name = "User name")]
         [Required]
         [StringLength(15)]
         public String UserName { get; set; }

@@ -15,7 +15,7 @@ namespace RecipeSite.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         // GET: Recipes
         public ActionResult Index()
         {

@@ -166,9 +166,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201510101234572_Init.cs" />
-    <Compile Include="Migrations\201510101234572_Init.Designer.cs">
-      <DependentUpon>201510101234572_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201510101444334_Init.cs" />
+    <Compile Include="Migrations\201510101444334_Init.Designer.cs">
+      <DependentUpon>201510101444334_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510101450135_Init1.cs" />
+    <Compile Include="Migrations\201510101450135_Init1.Designer.cs">
+      <DependentUpon>201510101450135_Init1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -266,8 +270,11 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510101234572_Init.resx">
-      <DependentUpon>201510101234572_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201510101444334_Init.resx">
+      <DependentUpon>201510101444334_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510101450135_Init1.resx">
+      <DependentUpon>201510101450135_Init1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
