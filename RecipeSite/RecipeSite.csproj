@@ -171,15 +171,17 @@
     <Compile Include="Migrations\201510112022525_yarden.Designer.cs">
       <DependentUpon>201510112022525_yarden.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510112141443_yyy.cs" />
+    <Compile Include="Migrations\201510112141443_yyy.Designer.cs">
+      <DependentUpon>201510112141443_yyy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Categorization.cs" />
     <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\CategoryView.cs" />
     <Compile Include="Models\Ingredient.cs" />
     <Compile Include="Models\Recipe.cs" />
-    <Compile Include="Models\RecipeView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -261,7 +263,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Upload\Images\Categories\" />
-    <Folder Include="Upload\Videos\recipes\" />
+    <Folder Include="Upload\Images\recipes\" />
+    <Folder Include="Upload\Videos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -270,6 +273,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201510112022525_yarden.resx">
       <DependentUpon>201510112022525_yarden.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510112141443_yyy.resx">
+      <DependentUpon>201510112141443_yyy.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

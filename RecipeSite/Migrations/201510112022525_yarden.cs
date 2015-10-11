@@ -39,7 +39,7 @@ namespace RecipeSite.Migrations
                         userId = c.Int(nullable: false),
                         title = c.String(),
                         content = c.String(),
-                        video = c.String(),
+                        image = c.String(),
                         likeAmount = c.Int(nullable: false),
                         author_Id = c.String(maxLength: 128),
                     })

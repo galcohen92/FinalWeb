@@ -50,17 +50,17 @@ namespace RecipeSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,userId,title,content,video,likeAmount")] Recipe recipe, HttpPostedFileBase upload)
+        public ActionResult Create([Bind(Include = "ID,userId,title,content,image,likeAmount")] Recipe recipe, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
                 if (upload != null && upload.ContentLength > 0)
                 {
-                    string videoName = System.IO.Path.GetFileName(upload.FileName);
-                    string videoPath = System.IO.Path.Combine(
-                       Server.MapPath("~/Upload/Videos/recipes"), videoName);
-                    upload.SaveAs(videoPath);
-                    recipe.video = "/Upload/Videos/recipes/" + videoName;
+                    string imageName = System.IO.Path.GetFileName(upload.FileName);
+                    string imagePath = System.IO.Path.Combine(
+                       Server.MapPath("~/Upload/Images/recipes"), imageName);
+                    upload.SaveAs(imagePath);
+                    recipe.image = "/Upload/Images/recipes/" + imageName;
                 }
 
                 db.Recipes.Add(recipe);
@@ -93,7 +93,7 @@ namespace RecipeSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,userId,title,content,video,likeAmount")] Recipe recipe)
+        public ActionResult Edit([Bind(Include = "ID,userId,title,content,image,likeAmount")] Recipe recipe)
         {
             if (ModelState.IsValid)
             {

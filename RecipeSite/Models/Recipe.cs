@@ -21,7 +21,7 @@ namespace RecipeSite.Models
 
 
         public String content { get; set; }
-        public String video { get; set; }
+        public String image { get; set; }
 
 
         public int likeAmount { get; set; }
@@ -30,7 +30,7 @@ namespace RecipeSite.Models
         //public IEnumerable<Ingredient> ingredients { get; set; }
 
 
-        //public virtual IEnumerable<Category> categories { get; set; }
+        public virtual IEnumerable<Category> categories { get; set; }
 
         public virtual ApplicationUser author { get; set; }
 

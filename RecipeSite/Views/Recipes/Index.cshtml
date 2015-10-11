@@ -18,7 +18,7 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.author.firstName)
+                @Html.DisplayNameFor(model => model.author.UserName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.title)
@@ -27,7 +27,7 @@
                 @Html.DisplayNameFor(model => model.content)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.video)
+                @Html.DisplayNameFor(model => model.image)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.likeAmount)
@@ -38,7 +38,7 @@
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.author.firstName)
+                @Html.DisplayFor(modelItem => item.author.UserName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.title)
@@ -47,7 +47,7 @@
                 @Html.DisplayFor(modelItem => item.content)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.video)
+                @Html.DisplayFor(modelItem => item.image)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.likeAmount)
