@@ -7,13 +7,13 @@ namespace RecipeSite.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class Init : IMigrationMetadata
+    public sealed partial class yarden : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Init));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(yarden));
         
         string IMigrationMetadata.Id
         {
-            get { return "201510101444334_Init"; }
+            get { return "201510112022525_yarden"; }
         }
         
         string IMigrationMetadata.Source
