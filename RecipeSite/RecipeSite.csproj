@@ -184,10 +184,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\RecipesDB.mdf" />
-    <Content Include="App_Data\RecipesDB_log.ldf">
-      <DependentUpon>RecipesDB.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -263,6 +259,7 @@
     <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Upload\Images\Categories\" />
     <Folder Include="Upload\Videos\recipes\" />
   </ItemGroup>
