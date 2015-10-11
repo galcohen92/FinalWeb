@@ -15,28 +15,31 @@ font-size:4em;
 
 #content {
 	display: table;
+    width:100%;
 }
 
 	#mainContent {
 		display: table-cell;
 		/*width: 70%;*/
 		padding-right: 22px;
+         
 	}
 
 aside {
 		display: table-cell;
-		/*width: 30%;*/
-        background-color:forestgreen;
+		width: 30%;
+        background-color:lightgrey;
+      
 		/*background: url('../images/sidebar_background.png') top left;*/
 	}
-
+footer {position: relative; bottom: 0;}
 
 /*------------------------------
 =SIDEBAR
 ------------------------------*/
 aside section {
-	margin: 22px 0 0 22px;
-	padding: 11px 22px;
+	margin: 11px 0 0 11px;
+	padding: 6px 11px;
 	/*background: url('../images/sidebar_section_background.png') repeat-x;*/
 	
 	/* Border-radius not implemented yet */
@@ -47,6 +50,7 @@ aside section {
 	aside section ul {
 		margin: 0 0 0 22px;
 		list-style: none;
+
 	}
 	
 		aside section ul li a {
@@ -57,6 +61,7 @@ aside section {
 		
 			aside section ul li a:hover {
 				text-decoration: underline;
+                
 			}
 
 
@@ -112,10 +117,21 @@ textarea {
     display: none;
 }
 
-/*thumbnail
------------------------------------------------------------*/
-
 .thumbnail img{
    height:250px;
    width:305px;
 }
+
+/* Only affects 1600px width and higher */
+@media only screen and (min-width: 1600px){ nav { font-size: 36px; }}
+/* Only affects 1200px-1600px width */
+@media only screen and (max-width: 1600px){ nav { font-size: 24px; }}
+/* Only affects 900px-1200px width */
+@media only screen and (max-width: 1200px){ nav { font-size: 12px; }}
+/* Only affects 600px-900px width */
+@media only screen and (max-width: 900px){ nav { font-size: 12px; }}
+/* Only affects 400-600px width */
+@media only screen and (max-width: 600px){ nav { font-size: 12px; }}
+/* Only affects 400px width and lower */
+@media only screen and (max-width: 400px){ nav { font-size: 12px; }}
+

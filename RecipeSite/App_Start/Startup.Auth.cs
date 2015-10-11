@@ -8,6 +8,7 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using System;
 using RecipeSite.Models;
+using RecipeSite.DAL;
 
 namespace RecipeSite
 {
@@ -27,12 +28,12 @@ namespace RecipeSite
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Account/Login"),
-                Provider = new CookieAuthenticationProvider
-                {
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
-                        validateInterval: TimeSpan.FromMinutes(30),
-                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
-                }
+                //Provider = new CookieAuthenticationProvider
+                //{
+                //    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
+                //        validateInterval: TimeSpan.FromMinutes(30),
+                //        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
+                //}
             });
 
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);

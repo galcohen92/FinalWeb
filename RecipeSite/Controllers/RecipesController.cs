@@ -7,13 +7,15 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using RecipeSite.Models;
+using RecipeSite.DAL;
 
 namespace RecipeSite.Controllers
 {
     public class RecipesController : Controller
     {
-        private RecipeSiteContext db = new RecipeSiteContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
+        //[Authorize(Roles = "admin")]
         // GET: Recipes
         public ActionResult Index()
         {

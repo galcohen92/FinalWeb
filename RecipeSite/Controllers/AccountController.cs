@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using RecipeSite.Models;
+using RecipeSite.DAL;
 
 namespace RecipeSite.Controllers
 {
@@ -18,9 +19,18 @@ namespace RecipeSite.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
+         private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
+        }
+
+        [Authorize(Roles = "admin")]
+        // GET: Recipes
+        public ActionResult Index()
+        {
+
+            return View(db.Users.ToList());
         }
 
         public AccountController(ApplicationUserManager userManager)
@@ -58,7 +68,7 @@ namespace RecipeSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindAsync(model.Email, model.Password);
+                var user = await UserManager.FindAsync(model.UserName, model.Password);
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
@@ -91,7 +101,10 @@ namespace RecipeSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser()
+                {
+                    Email = model.Email, UserName = model.UserName,BirthDate = model.birthDate,
+                    Country = model.country, City = model.city, Address = model.address};
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -481,8 +494,11 @@ namespace RecipeSite.Controllers
 
         private async Task SignInAsync(ApplicationUser user, bool isPersistent)
         {
+            //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            //AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, await user.GenerateUserIdentityAsync(UserManager));
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, await user.GenerateUserIdentityAsync(UserManager));
+            var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
         }
 
         private void AddErrors(IdentityResult result)

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace RecipeSite.Models
 {
@@ -33,14 +34,16 @@ namespace RecipeSite.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+
     }
 
     public class LoginViewModel
     {
         [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        //[EmailAddress]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -68,6 +71,35 @@ namespace RecipeSite.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "User name")]
+        [Required]
+        [StringLength(15)]
+        public String UserName { get; set; }
+
+        //[Display(Name = "last name")]
+        //[Required]
+        //[StringLength(15)]
+        //public String lastName { get; set; }
+
+        [Display(Name = "birthday")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime birthDate { get; set; }
+
+        [StringLength(15)]
+        public String country { get; set; }
+
+        [StringLength(15)]
+        public String city { get; set; }
+
+        [StringLength(40)]
+        public String address { get; set; }
+
+        //[DataType(DataType.EmailAddress)]
+        //[Required]
+        //public String email { get; set; }
+
     }
 
     public class ResetPasswordViewModel

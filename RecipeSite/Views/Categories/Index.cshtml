@@ -1,4 +1,4 @@
-﻿@model List<RecipeSite.Models.Category>
+﻿@model IEnumerable<RecipeSite.Models.Category>
 
 @{
     ViewBag.Title = "categories";
@@ -26,14 +26,14 @@
                         <img src="@item.imageUrl" />
                         <div class="caption">
                             <h3>@Html.DisplayFor(modelItem => item.name)</h3>
-                      
+    
                       @*      edit and delete for admin*@ 
                            <p><a href="@Url.Action("edit","Categories", new { id=item.ID })" class="btn btn-primary" role="button">edit</a> <a href="@Url.Action("delete","Categories", new { id=item.ID })" class="btn btn-default" role="button">delete</a></p>
                         </div>
                     </div>
                 </div>
-            }
+    }
         </div>
-        
+    
 </body>
 </html>
