@@ -48,10 +48,19 @@ namespace RecipeSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,userId,title,content,video,likeAmount")] Recipe recipe)
+        public ActionResult Create([Bind(Include = "ID,userId,title,content,video,likeAmount")] Recipe recipe, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    string videoName = System.IO.Path.GetFileName(upload.FileName);
+                    string videoPath = System.IO.Path.Combine(
+                       Server.MapPath("~/Upload/Videos/recipes"), videoName);
+                    upload.SaveAs(videoPath);
+                    recipe.video = "/Upload/Videos/recipes/" + videoName;
+                }
+
                 db.Recipes.Add(recipe);
                 db.SaveChanges();
                 return RedirectToAction("Index");
