@@ -1,7 +1,7 @@
 ﻿@model RecipeSite.Models.Category
 
 @{
-    Layout = null;
+    ViewBag.Title = "category details";
 }
 
 <!DOCTYPE html>
@@ -19,19 +19,22 @@
             <dt>
                 @Html.DisplayNameFor(model => model.name)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.name)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.imageUrl)
             </dt>
-    
+
             <dd>
-                @Html.DisplayFor(model => model.imageUrl)
+                @*@Html.DisplayFor(model => model.imageUrl)*@
+                <img src="@Model.imageUrl" alt="" />
+                @*<img src="~/Upload/Images/Categories/meat.jpg" alt="" />*@
+
             </dd>
-    
+
         </dl>
     </div>
     <p>

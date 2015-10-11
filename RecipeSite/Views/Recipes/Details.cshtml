@@ -1,7 +1,7 @@
 ﻿@model RecipeSite.Models.Recipe
 
 @{
-    Layout = null;
+    ViewBag.title = "Recipe details";
 }
 
 <!DOCTYPE html>
@@ -45,7 +45,7 @@
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.video)
+                <video src="~/Upload/Videos/recipes/yyy.mp4"></video>
             </dd>
     
             <dt>
@@ -59,6 +59,8 @@
         </dl>
     </div>
     <p>
+        <video src="~/Upload/Videos/recipes/yyy.mp4"></video>
+
         @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
         @Html.ActionLink("Back to List", "Index")
     </p>

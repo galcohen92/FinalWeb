@@ -111,3 +111,11 @@ textarea {
 .validation-summary-valid {
     display: none;
 }
+
+/*thumbnail
+-----------------------------------------------------------*/
+
+.thumbnail img{
+   height:250px;
+   width:305px;
+}

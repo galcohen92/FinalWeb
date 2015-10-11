@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -268,6 +269,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Upload\Images\Categories\" />
+    <Folder Include="Upload\Videos\recipes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

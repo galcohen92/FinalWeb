@@ -1,7 +1,7 @@
-﻿@model IEnumerable<RecipeSite.Models.Category>
+﻿@model List<RecipeSite.Models.Category>
 
 @{
-    Layout = null;
+    ViewBag.Title = "categories";
 }
 
 <!DOCTYPE html>
@@ -12,36 +12,28 @@
     <title>Index</title>
 </head>
 <body>
+
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.imageUrl)
-            </th>
-            <th></th>
-        </tr>
+
+        <div class="row">
     
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.imageUrl)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-            </td>
-        </tr>
-    }
-    
-    </table>
+        @foreach (var item in Model)
+        {
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="@item.imageUrl" />
+                        <div class="caption">
+                            <h3>@Html.DisplayFor(modelItem => item.name)</h3>
+                      
+                      @*      edit and delete for admin*@ 
+                           <p><a href="@Url.Action("edit","Categories", new { id=item.ID })" class="btn btn-primary" role="button">edit</a> <a href="@Url.Action("delete","Categories", new { id=item.ID })" class="btn btn-default" role="button">delete</a></p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        
 </body>
 </html>
