@@ -122,6 +122,25 @@ textarea {
    width:305px;
 }
 
+
+.favorite {
+	     position: absolute; 
+    /* left: 0; */
+    /* width: 100%; */
+    background: url("images/Heart_icon_red_hollow.png");
+    background-repeat: no-repeat;
+    /* top: 1px; */
+    /* display: block; */
+    /* font-family: 'Glyphicons Halflings'; */
+    font-style: normal;
+    font-weight: 400;
+    /* line-height: 1; */
+    /* -webkit-font-smoothing: antialiased; */
+    height: 100%;
+    width: 100%;
+
+}
+
 /* Only affects 1600px width and higher */
 @media only screen and (min-width: 1600px){ nav { font-size: 36px; }}
 /* Only affects 1200px-1600px width */

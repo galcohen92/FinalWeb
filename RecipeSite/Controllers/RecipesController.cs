@@ -19,7 +19,7 @@ namespace RecipeSite.Controllers
         // GET: Recipes
         public ActionResult Index()
         {
-            var recipes = db.Recipes.Include(r => r.author);
+            var recipes = db.Recipes;//.Include(r => r.author);
             return View(recipes.ToList());
         }
 
@@ -35,13 +35,16 @@ namespace RecipeSite.Controllers
             {
                 return HttpNotFound();
             }
+
+             //db.Entry(recipe).Collection("categories").Load();
             return View(recipe);
         }
 
         // GET: Recipes/Create
         public ActionResult Create()
         {
-            ViewBag.userId = new SelectList(db.Users, "ID", "firstName");
+            ViewBag.userId = 5;// db.Users.ToList()[0].Id;// new SelectList(db.Users, "ID", "firstName");
+            ViewBag.allCategories = db.Categories.ToList();
             return View();
         }
 
@@ -131,6 +134,22 @@ namespace RecipeSite.Controllers
             return RedirectToAction("Index");
         }
 
+        // POST: Recipes/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddLike(int? id)
+        {
+            Recipe recipe = db.Recipes.Find(id);
+            recipe.likeAmount++;
+            db.Entry(recipe).State = EntityState.Modified;
+       
+                db.Entry(recipe).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -141,3 +160,4 @@ namespace RecipeSite.Controllers
         }
     }
 }
+

@@ -15,20 +15,14 @@ namespace RecipeSite.Models
 
         public int userId { get; set; }
 
-
-
         public String title { get; set; }
-
 
         public String content { get; set; }
         public String image { get; set; }
 
-
         public int likeAmount { get; set; }
 
-
         //public IEnumerable<Ingredient> ingredients { get; set; }
-
 
         public virtual IEnumerable<Category> categories { get; set; }
 

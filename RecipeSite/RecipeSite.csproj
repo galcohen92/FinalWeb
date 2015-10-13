@@ -175,6 +175,10 @@
     <Compile Include="Migrations\201510112141443_yyy.Designer.cs">
       <DependentUpon>201510112141443_yyy.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510120853355_ewe.cs" />
+    <Compile Include="Migrations\201510120853355_ewe.Designer.cs">
+      <DependentUpon>201510120853355_ewe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -190,6 +194,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\Heart_icon_red_hollow.png" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -276,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510112141443_yyy.resx">
       <DependentUpon>201510112141443_yyy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510120853355_ewe.resx">
+      <DependentUpon>201510120853355_ewe.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
