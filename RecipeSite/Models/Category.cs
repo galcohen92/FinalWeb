@@ -13,6 +13,8 @@ namespace RecipeSite.Models
 
         public String imageUrl { get; set; }
 
+        public virtual ICollection<Recipe> Recipes { get; set; }
+
         public Category(){}
 
         public Category(String name, String url)

@@ -24,6 +24,12 @@ namespace RecipeSite.Controllers
             return View(recipes.ToList());
         }
 
+        public ActionResult IndexByCategory(int? categoryId)
+        {
+            var recipes = db.Categories.Find(categoryId).Recipes;
+            return View("Index", recipes.ToList());
+        }
+
         // GET: Recipes/Details/5
         public ActionResult Details(int? id)
         {
@@ -32,9 +38,9 @@ namespace RecipeSite.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Recipe recipe = db.Recipes.Find(id);
-            db.Entry(recipe)
-                .Collection(x => x.Categories)
-                .Load();
+            //db.Entry(recipe)
+            //    .Collection(x => x.Categories)
+            //    .Load();
 
             if (recipe == null)
             {
