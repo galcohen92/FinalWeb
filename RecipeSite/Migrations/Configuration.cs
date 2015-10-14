@@ -22,7 +22,15 @@ namespace RecipeSite.Migrations
                 var store = new RoleStore<IdentityRole>(context);
                 var manager = new RoleManager<IdentityRole>(store);
                 var role = new IdentityRole { Name = "Admins" };
-            //  This method will be called after migrating to the latest version.
+
+                manager.Create(role);
+            }
+
+            if (!context.Roles.Any(r => r.Name == "Users"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "Users" };
 
                 manager.Create(role);
             }
@@ -37,8 +45,7 @@ namespace RecipeSite.Migrations
                 manager.AddToRole(user.Id, "Admins");
             }
 
-
-            
+            context.SaveChanges();
         }
     }
 }

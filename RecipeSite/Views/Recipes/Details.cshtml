@@ -20,13 +20,13 @@
             @*<span class="favorite " aria-hidden="true" onclick="addLike()">
                 <label style="padding-left:10px; padding-top:3px">@Html.DisplayFor(model => model.likeAmount)</label>
             </span>*@
-        @*<div class="col-md-7 col-xs-5">
-            |
-            @foreach (RecipeSite.Models.Category currentCategory in Model.categories)
+        <div class="col-md-7 col-xs-5">
+            @foreach (RecipeSite.Models.Category currentCategory in Model.Categories)
             {
-                <label>@Html.Display(currentCategory.name) |</label>
+                @currentCategory.name
+                
             }
-        </div>*@
+        </div>
     </div>
         
    

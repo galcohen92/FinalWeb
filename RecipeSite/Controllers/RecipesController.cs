@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using RecipeSite.Models;
 using RecipeSite.DAL;
+using Microsoft.AspNet.Identity;
 
 namespace RecipeSite.Controllers
 {
@@ -31,19 +32,22 @@ namespace RecipeSite.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Recipe recipe = db.Recipes.Find(id);
+            db.Entry(recipe)
+                .Collection(x => x.Categories)
+                .Load();
+
             if (recipe == null)
             {
                 return HttpNotFound();
             }
 
-             //db.Entry(recipe).Collection("categories").Load();
             return View(recipe);
         }
 
         // GET: Recipes/Create
         public ActionResult Create()
         {
-            ViewBag.userId = 5;// db.Users.ToList()[0].Id;// new SelectList(db.Users, "ID", "firstName");
+            ViewBag.userId = User.Identity.GetUserId();
             ViewBag.allCategories = db.Categories.ToList();
             return View();
         }
@@ -53,7 +57,7 @@ namespace RecipeSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,userId,title,content,image,likeAmount")] Recipe recipe, HttpPostedFileBase upload)
+        public ActionResult Create([Bind(Include = "ID,userId,title,content,image,likeAmount")] Recipe recipe, HttpPostedFileBase upload, string selectedCategories)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +68,19 @@ namespace RecipeSite.Controllers
                        Server.MapPath("~/Upload/Images/recipes"), imageName);
                     upload.SaveAs(imagePath);
                     recipe.image = "/Upload/Images/recipes/" + imageName;
+                }
+
+                if (selectedCategories != null && !selectedCategories.Equals(""))
+                {
+                    string[] categoriesId = selectedCategories.Split(',');
+                    recipe.Categories = new List<Category>();
+                    foreach (var currentCategoryId in categoriesId)
+                    {
+                        var categoryToAdd = db.Categories.Find(int.Parse(currentCategoryId.ToString()));
+
+                        db.Categories.Attach(categoryToAdd);
+                        recipe.Categories.Add(categoryToAdd);
+                    }
                 }
 
                 db.Recipes.Add(recipe);

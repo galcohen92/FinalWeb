@@ -45,7 +45,7 @@ namespace RecipeSite.Models
 
         public ApplicationUser()
         {
-
+            BirthDate = DateTime.Now;
         }        
     }
 }

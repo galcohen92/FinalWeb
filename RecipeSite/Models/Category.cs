@@ -21,5 +21,4 @@ namespace RecipeSite.Models
             this.name = name;
         }
     }
-
 }

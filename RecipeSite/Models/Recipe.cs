@@ -2,35 +2,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace RecipeSite.Models
 {
-
-
     public class Recipe
     {
         public int ID { get; set; }
 
-        public int userId { get; set; }
+        public string userId { get; set; }
 
         public String title { get; set; }
 
         public String content { get; set; }
+
         public String image { get; set; }
 
         public int likeAmount { get; set; }
 
         //public IEnumerable<Ingredient> ingredients { get; set; }
 
-        public virtual IEnumerable<Category> categories { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
 
+        [ForeignKey("userId")]
         public virtual ApplicationUser author { get; set; }
 
-        public Recipe()
-        {
-
-        }
+        public Recipe(){}
     }
 }
