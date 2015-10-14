@@ -1,8 +1,4 @@
-﻿@model IEnumerable<RecipeSite.Models.ApplicationUser>
-
-@{
-    Layout = null;
-}
+﻿@model IEnumerable<RecipeSite.Models.UserRoleView>
 
 <!DOCTYPE html>
 
@@ -17,6 +13,9 @@
     </p>
     <table class="table">
         <tr>
+             <th>
+              @Html.DisplayNameFor(model => model.UserName)
+            </th>
             <th>
               @Html.DisplayNameFor(model => model.UserName)
             </th>
@@ -28,16 +27,19 @@
     
     @foreach (var item in Model) {
         <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.Email)
+            </th>
             <td>
                 @Html.DisplayFor(modelItem => item.UserName) 
             </td>
             <td>
-                @Html.DisplayFor(model => model.UserName)
+                @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |*@
+                @Html.ActionLink("Details", "Details", new { id = item.UserID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
             </td>
         </tr>
     }

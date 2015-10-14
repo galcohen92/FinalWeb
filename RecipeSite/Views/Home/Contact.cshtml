@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<RecipeSite.Models.ApplicationUser>
+
+@{
     ViewBag.Title = "Contact";
 }
 <h2>@ViewBag.Title.</h2>
@@ -15,3 +17,9 @@
     <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
+
+@foreach (var item in Model)
+{ 
+    @Html.DisplayFor(modelItem => item.UserName)
+}
+            

@@ -19,18 +19,34 @@ namespace RecipeSite.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
-         private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
         }
 
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         // GET: Recipes
         public ActionResult Index()
         {
+            IList<UserRoleView> users = new List<UserRoleView>();
+            var query = from u in db.Users
+                        from ur in u.Roles
+                        join r in db.Roles on ur.RoleId equals r.Id
+                        select new
+                        {
+                            u.Id,
+                            Name = u.UserName,
+                            Role = r.Name,
+                            Email = u.Email
+                        };
+            //var UserRole = db.Users.Join(db.Roles, u => u.Id, r => r, new UserRoleView() { UserID = item.Id, Email = item.Email, Role = item.Role, UserName = item.Name });
+            foreach (var item in query.ToList())
+            {
+                users.Add(new UserRoleView(){UserID = item.Id, Email = item.Email, Role = item.Role, UserName = item.Name});
+            }
 
-            return View(db.Users.ToList());
+            return View(users.ToList());
         }
 
         public AccountController(ApplicationUserManager userManager)
