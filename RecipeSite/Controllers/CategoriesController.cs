@@ -89,10 +89,18 @@ namespace RecipeSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,name,imageUrl")] Category category)
+        public ActionResult Edit([Bind(Include = "ID,name,imageUrl")] Category category, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    string picName = System.IO.Path.GetFileName(upload.FileName);
+                    string picPath = System.IO.Path.Combine(
+                       Server.MapPath("~/Upload/Images/Categories"), picName);
+                    upload.SaveAs(picPath);
+                    category.imageUrl = "/Upload/Images/Categories/" + picName;
+                }
                 db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
