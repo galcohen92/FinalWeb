@@ -126,6 +126,11 @@ namespace RecipeSite.Models
         [StringLength(40)]
         public String address { get; set; }
 
+
+        public RegisterViewModel()
+        {
+            this.birthDate = DateTime.Now;
+        }
         //[DataType(DataType.EmailAddress)]
         //[Required]
         //public String email { get; set; }

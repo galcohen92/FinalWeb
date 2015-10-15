@@ -142,15 +142,33 @@ textarea {
 }
 
 /* Only affects 1600px width and higher */
-@media only screen and (min-width: 1600px){ nav { font-size: 36px; }}
+@media only screen and (min-width: 1600px){ nav {font-size: 36px; text-align:left;}}
 /* Only affects 1200px-1600px width */
-@media only screen and (max-width: 1600px){ nav { font-size: 24px; }}
+@media only screen and (max-width: 1600px){ nav { font-size: 24px; text-align:left; }}
 /* Only affects 900px-1200px width */
-@media only screen and (max-width: 1200px){ nav { font-size: 12px; }}
+@media only screen and (max-width: 1200px){ nav { font-size: 12px; text-align:left;}}
 /* Only affects 600px-900px width */
-@media only screen and (max-width: 900px){ nav { font-size: 12px; }}
+@media only screen and (max-width: 900px){ nav { font-size: 12px;text-align:left; }}
 /* Only affects 400-600px width */
-@media only screen and (max-width: 600px){ nav { font-size: 12px; }}
+@media only screen and (max-width: 600px){ nav { font-size: 12px;text-align:left; }}
 /* Only affects 400px width and lower */
-@media only screen and (max-width: 400px){ nav { font-size: 12px; }}
+@media only screen and (max-width: 400px){ nav { font-size: 12px;text-align:left; }}
 
+dl {
+    float: left;
+  width: 100%;
+  overflow: hidden;
+  text-align:left;
+ 
+  margin: 10px
+}
+
+dt{
+    text-align:left;
+     padding: 5px;
+}
+
+dd{
+      text-align:left;
+      padding: 5px;
+}
