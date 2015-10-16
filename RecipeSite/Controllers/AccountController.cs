@@ -12,6 +12,7 @@ using Microsoft.Owin.Security;
 using Owin;
 using RecipeSite.Models;
 using RecipeSite.DAL;
+using System.Net;
 
 namespace RecipeSite.Controllers
 {
@@ -25,8 +26,7 @@ namespace RecipeSite.Controllers
         {
         }
 
-        //[Authorize(Roles = "admin")]
-        // GET: Recipes
+        [Authorize(Roles = "Admins")]
         public ActionResult Index()
         {
             IList<UserRoleView> users = new List<UserRoleView>();
@@ -47,6 +47,48 @@ namespace RecipeSite.Controllers
             }
 
             return View(users.ToList());
+        }
+
+
+        // GET: Account/Delete/5
+        public ActionResult Delete(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        // POST: Account/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string id)
+        {
+            ApplicationUser user = db.Users.Find(id);
+            db.Users.Remove(user);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        // GET: Account/Details/5
+        public ActionResult Details(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
         }
 
         public AccountController(ApplicationUserManager userManager)
@@ -122,10 +164,14 @@ namespace RecipeSite.Controllers
                     Email = model.Email, UserName = model.UserName,BirthDate = model.birthDate,
                     Country = model.country, City = model.city, Address = model.address};
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+                var store = new UserStore<ApplicationUser>(db);
+                var manager = new UserManager<ApplicationUser>(store);
+
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
-
+                    manager.AddToRole(user.Id, "Users");
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
