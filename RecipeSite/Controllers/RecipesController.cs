@@ -75,6 +75,10 @@ namespace RecipeSite.Controllers
                     upload.SaveAs(imagePath);
                     recipe.image = "/Upload/Images/recipes/" + imageName;
                 }
+                else
+                {
+                    recipe.image = "/Content/images/no-image.png";
+                }
 
                 if (selectedCategories != null && !selectedCategories.Equals(""))
                 {
@@ -111,6 +115,24 @@ namespace RecipeSite.Controllers
                 return HttpNotFound();
             }
             ViewBag.userId = new SelectList(db.Users, "ID", "firstName", recipe.userId);
+            ViewBag.allCategories = db.Categories.ToList();
+            string idsArr = "";
+            foreach (var item in recipe.Categories)
+	        {
+		        idsArr += item.ID + ",";
+	        }
+
+            if (idsArr.Length > 0)
+            {
+                idsArr = idsArr.Remove(idsArr.Length-1);
+            }
+            //List<int> ids = recipe.Categories
+            //                        .Select(x => x.ID)
+            //                        .ToList();
+            ////ViewBag.selectedIdsList = recipe.Categories
+            //                        .Select(x => x.ID)
+            //                        .ToList(); 
+            ViewBag.selectedIdsList = idsArr.ToString();
             return View(recipe);
         }
 
@@ -160,17 +182,16 @@ namespace RecipeSite.Controllers
         // POST: Recipes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddLike(int? id)
+        //[HttpPost]
+        public ActionResult AddLike(int? id, string actionName)
         {
             Recipe recipe = db.Recipes.Find(id);
             recipe.likeAmount++;
             db.Entry(recipe).State = EntityState.Modified;
        
-                db.Entry(recipe).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+            db.Entry(recipe).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction(actionName, new { id = id });
         }
 
         protected override void Dispose(bool disposing)

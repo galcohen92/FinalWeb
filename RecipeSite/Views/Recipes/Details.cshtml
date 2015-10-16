@@ -13,36 +13,59 @@
 </head>
 <body>
     <div class="row">
-        <h1>@Html.DisplayFor(model => model.title)</h1>
-        <small>@Html.DisplayFor(model => model.author.UserName) </small>
+        <h1>@Html.DisplayFor(model => model.title)
+            <small>@Html.DisplayFor(model => model.author.UserName) </small>    
+        </h1>  
     </div>
     <div class="row">
-            @*<span class="favorite " aria-hidden="true" onclick="addLike()">
-                <label style="padding-left:10px; padding-top:3px">@Html.DisplayFor(model => model.likeAmount)</label>
-            </span>*@
+      
         <div class="col-md-7 col-xs-5">
             @foreach (RecipeSite.Models.Category currentCategory in Model.Categories)
             {
-                @currentCategory.name
-                
+               <label>@currentCategory.name
+                        |</label>
             }
         </div>
-    </div>
+        <div>
+            <span class="favorite" aria-hidden="true" onclick="addLike(@Model.ID)">
+                <label id="fev_@Model.ID" style="padding-left:10px; padding-top:3px">@Html.DisplayFor(model => model.likeAmount)</label>
+            </span>
+        </div>
         
-   
-        <hr />
+    </div>
+
+     <hr />
+
     <div class="row">
         <img class="col-md-5 col-xs-4" src="@Html.DisplayFor(model => model.image)" alt="...">
-
-
         @Html.DisplayFor(model => model.content)
-        @* need add categories!!!! *@
     </div>
-    <p>
+   
+     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
         @Html.ActionLink("Back to List", "Index") |
         @Html.ActionLink("Delete", "Delete", new { id = Model.ID })
     </p>
+
+    <script type="text/javascript">
+
+        function addLike(resId) {
+            $.ajax({
+                type: "post",
+                url: '/Recipes/AddLike',
+                data: { "id": resId, "actionName": "Details" },
+                cache: false,
+                success: function () {
+                    var itId= "#fev_" + resId;
+                    var calc = Number($(itId).text()) + 1;
+                    $(itId).text(calc);
+                },
+                error: function() {
+                    alert('error');
+                }
+            });
+        }
+    </script>
 </body>
 </html>
 
