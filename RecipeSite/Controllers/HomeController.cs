@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace RecipeSite.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();

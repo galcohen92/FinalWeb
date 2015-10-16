@@ -2,13 +2,83 @@
     ViewBag.Title = "About";
 }
 
+<meta property="og:url" content="https://www.facebook.com/recipeSiteWeb?skip_nax_wizard=true" />
+@*<meta property="og:type" content="article" />
+<meta property="og:title" content="About page" />
+<meta property="og:description" content="about properties about recipe site" />
+@*<meta property="og:image" content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg" />*@
+@*<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '818834374895942',
+            xfbml: true,
+            version: 'v2.5'
+        });
+    };
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+</script>*@
+
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=818834374895942";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.5.1.js">
+</script>
+<script src="https://connect.facebook.net/en_US/all.js">
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#shareonfacebook').click(function (e) {
+            alert('hello9');
+            e.preventDefault();
+            FB.ui(
+            {
+                method: 'feed',
+                name: 'DebugmodeEventPlans',
+                link: 'https://www.google.com',
+                caption: 'YARDENNN',
+                description: 'hey how is my Application ?',
+                message: ''
+            });
+        });
+    });
+</script>
+
+@*<button id="shareonfacebook">ShareOnFaceBook</button>*@
+
+<script>
+    FB.init({
+        appId: '818834374895942'
+    });
+</script>
+
+<div class="fb-page" data-href="https://www.facebook.com/recipeSiteWeb?ref=aymt_homepage_panel" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/recipeSiteWeb?ref=aymt_homepage_panel"><a href="https://www.facebook.com/recipeSiteWeb?ref=aymt_homepage_panel">RecipeSite</a></blockquote></div></div>
+
+<div class="fb-like" data-href="https://www.facebook.com/recipeSiteWeb?skip_nax_wizard=true" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+
+@*<div data-href="https://localhost:44300/Home/About" data-layout="icon_link"> like </div>*@
 
 
-<div onload="init();" class="subdiv">
-    <canvas id="MyCanvas1" width="300" height="200">
-        This browser or document mode doesn't support canvas object
-    </canvas>
+<div class="fb-share-button"
+     data-width="450"
+     data-show-faces="true"
+     id="shareonfacebook">
 </div>
+
 <p><h3>ברוכים הבאים לאתר מתכונים!</h3></p>
 
 <p>אתר זה מציג מתכונים מכל הסוגים ומכל המינים</p>
