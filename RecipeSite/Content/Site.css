@@ -16,21 +16,30 @@ font-size:4em;
 #content {
 	display: table;
     width:100%;
+     height: 100%;
 }
 
 	#mainContent {
 		display: table-cell;
-		/*width: 70%;*/
+		width: 70%;
 		padding-right: 22px;
          
 	}
 
 aside {
 		display: table-cell;
-		width: 30%;
+		width: 20%;
         background-color:lightgrey;
-      
+        height:500px;
 		/*background: url('../images/sidebar_background.png') top left;*/
+              /*-moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;*/
+  
+    overflow: visible;
+    /*margin:10px;*/
+    /*margin-bottom:10px;
+    margin-top:10px;*/
 	}
 footer {position: relative; bottom: 0;}
 
@@ -38,14 +47,16 @@ footer {position: relative; bottom: 0;}
 =SIDEBAR
 ------------------------------*/
 aside section {
-	margin: 11px 0 0 11px;
-	padding: 6px 11px;
+	/*margin: 11px 0 0 11px;*/
+	/*padding: 6px 11px;*/
 	/*background: url('../images/sidebar_section_background.png') repeat-x;*/
 	
 	/* Border-radius not implemented yet */
 	-moz-border-radius: 11px;
 	-webkit-border-radius: 11px;
+    /*height:initial;*/
 }
+
 
 	aside section ul {
 		margin: 0 0 0 22px;
@@ -64,8 +75,10 @@ aside section {
                 
 			}
 
-
-
+      
+            canvas{
+                /*margin: 0 0 0 22px;*/
+            }
 
 /* Styles for basic forms
 -----------------------------------------------------------*/
@@ -143,16 +156,20 @@ textarea {
 
 /* Only affects 1600px width and higher */
 @media only screen and (min-width: 1600px){ nav {font-size: 36px; text-align:left;}}
-/* Only affects 1200px-1600px width */
-@media only screen and (max-width: 1600px){ nav { font-size: 24px; text-align:left; }}
+/*@media only screen and (min-width: 1600px){ body {font-size: 24px; text-align:left;}}*/
+
 /* Only affects 900px-1200px width */
 @media only screen and (max-width: 1200px){ nav { font-size: 12px; text-align:left;}}
+/*@media only screen and (min-width: 1200px){ body {font-size: 12px; text-align:left;}}*/
 /* Only affects 600px-900px width */
 @media only screen and (max-width: 900px){ nav { font-size: 12px;text-align:left; }}
+/*@media only screen and (min-width: 900px){ body {font-size: 12px; text-align:left;}}*/
 /* Only affects 400-600px width */
 @media only screen and (max-width: 600px){ nav { font-size: 12px;text-align:left; }}
+/*@media only screen and (min-width: 600px){ body {font-size: 12px; text-align:left;}}*/
 /* Only affects 400px width and lower */
 @media only screen and (max-width: 400px){ nav { font-size: 12px;text-align:left; }}
+/*@media only screen and (min-width: 400px){ body {font-size: 12px; text-align:left;}}*/
 
 dl {
     float: left;

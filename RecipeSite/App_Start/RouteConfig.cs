@@ -16,8 +16,15 @@ namespace RecipeSite
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Categories", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional }
             );
+
+            //routes.MapRoute(
+            //    name: "Default",
+            //    url: "Viewes/{action}/{id}",
+            //    defaults: new { controller = "Home", action = "About", id = UrlParameter.Optional }
+            //);
+
         }
     }
 }

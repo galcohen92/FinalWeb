@@ -20,12 +20,6 @@ namespace RecipeSite.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
             //ViewBag.Message = "Your contact page.";
 
             //IList<ApplicationUser> users = new List<ApplicationUser>();
@@ -38,7 +32,11 @@ namespace RecipeSite.Controllers
             //{
             //    users.Add(new ApplicationUser(){UserName = item});
             //}
+            return View();
+        }
 
+        public ActionResult Aside()
+        {
 
             IList<ApplicationUser> users = new List<ApplicationUser>();
 
@@ -54,6 +52,11 @@ namespace RecipeSite.Controllers
             }
 
             return View(users.ToList());
+        }
+
+        public ActionResult Contact()
+        {
+            return View();   
         }
     }
 }
