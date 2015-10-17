@@ -18,52 +18,50 @@
     
 @using (Html.BeginForm("Create", "Recipes", null, FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))
 {
-        @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
         
-        <div class="form-horizontal">
-            <h4>Recipe</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-horizontal">
+        <h4>Recipe</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     
         @Html.HiddenFor(model => model.userId, new { @Value = ViewBag.userId });
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
             </div>
+        </div>
     
-            <div class="form-group">
-                @Html.LabelFor(model => model.content, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+        <div class="form-group">
+            @Html.LabelFor(model => model.content, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
                 @Html.TextAreaFor(model => model.content, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.content, "", new { @class = "text-danger" })
-                </div>
+                @Html.ValidationMessageFor(model => model.content, "", new { @class = "text-danger" })
             </div>
+        </div>
     
-            <div class="form-group">
-                @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input type="file" id="image" name="upload" />
-                    @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" id="image" name="upload" />
+                @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
             </div>
-    
-            <div class="form-group">
-            @Html.LabelFor(model => model.Categories, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                <select multiple id="categoriesSelect">
-                    @foreach (RecipeSite.Models.Category currentCategory in ViewBag.allCategories)
-                    {
-                        <option value="@currentCategory.ID"> @currentCategory.name</option>
-                    }
-                </select>
-                </div>
-            </div>
-    
+        </div>
+ 
         <input type="hidden" id="selectedCategories" name="selectedCategories" value=" " />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Categories, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div id="categories" class="col-md-10">
+                @foreach (RecipeSite.Models.Category currentCategory in ViewBag.allCategories)
+                {
+                    <input type="checkbox" value="@currentCategory.ID">@currentCategory.name
+                }
+            </div>
+        </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -71,17 +69,27 @@
                 </div>
             </div>
         </div>
-    }
+}
     
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
 
     <script type="text/javascript">
-    function addSelectedToList() {
-        var selected = $('select[id=categoriesSelect]').val();
-        $("#selectedCategories").val(selected)
-    }
+        function addSelectedToList() {
+            var selectedIds = "";
+            $('#categories input:checkbox').each(function () {
+                if (this.checked) {
+                    if (selectedIds != "") {
+                        selectedIds += ",";
+                    }
+
+                    selectedIds += $(this).val();
+                }
+            });
+
+            $("#selectedCategories").val(selectedIds);
+        }
     </script>
 
 </body>
