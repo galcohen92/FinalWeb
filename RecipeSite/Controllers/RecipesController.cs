@@ -88,7 +88,7 @@ namespace RecipeSite.Controllers
                     {
                         var categoryToAdd = db.Categories.Find(int.Parse(currentCategoryId.ToString()));
 
-                        //db.Categories.Attach(categoryToAdd);
+                        db.Categories.Attach(categoryToAdd);
                         recipe.Categories.Add(categoryToAdd);
                     }
                 }

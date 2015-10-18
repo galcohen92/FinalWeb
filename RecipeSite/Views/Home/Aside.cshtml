@@ -3,37 +3,34 @@
     Layout = null;
 }           
 
-<aside class="col-lg-3 hidden-xs " >
+<aside class="col-lg-3 col-md-4 hidden-sm hidden-xs" style="padding-right:5px;padding-left:0px;">
 
-    <div style="margin:10px">
-        <img style="width:95%" src="~/Upload/Images/Style/news3.dib" />
-        <canvas id="MyCanvas1" onload="init();" >
+    <section style="height:50%">
+        <div>
+            <label>What's new?</label>
+            <img src="~/Upload/Images/Style/news3.dib" />
+
+        </div>
+
+        <canvas id="MyCanvas1" onload="init();">
             This browser or document mode doesn't support canvas object
         </canvas>
-    </div>
-    <div class="fb-like" data-href="https://www.facebook.com/recipeSiteWeb?ref=aymt_homepage_panel" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-
-    <section id="asideMenu" style="height:100%">
-        <section style="margin:20px;width:100%;height:50%;">
-            <header>
-                <h3>Popular Users</h3>
-            </header>
-            <ul>
-                @foreach (var item in Model)
-                {
-                    <li>@Html.DisplayFor(modelItem => item.UserName)</li>
-                }
-            </ul>
-        </section>
-        <section style="width:100%;height:50%;">
-            <header>
-                <h3>Most Helathy foods</h3>
-            </header>
-
-
-
-        </section>
     </section>
+    <section style="height:40%">
+
+        <header>
+            <label>Popular Users</label>
+        </header>
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>@Html.DisplayFor(modelItem => item.UserName)</li>
+            }
+        </ul>
+    </section>
+  
+    <section style="height:10%" class="fb-like" data-href="https://www.facebook.com/recipeSiteWeb?ref=aymt_homepage_panel" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></section>
+
 </aside>
 
 <script type="text/javascript">
@@ -45,7 +42,7 @@
         ctx = can.getContext("2d")  ;
         ctx.fillStyle = "black";
         ctx.font = "10pt Verdana";
-        ctx.textAlign = "end";
+       
         ctx.textBaseline = "middle";
 
         step = 0;
@@ -57,10 +54,12 @@
         step++;
         ctx.clearRect(0, 0, can.width, can.height);
         ctx.save();
-        ctx.translate(can.width , step);
-        ctx.fillText("NEW!!!", 5, 0);
-        ctx.fillText("Hot Chocolate Cake Recipe", 5, 15);
-        ctx.fillText("The Best in Town !!!", 5, 30);
+        ctx.translate(can.width, step);
+        ctx.textAlign = "left";
+        ctx.fillText("NEW!!!",-can.width, 0);
+        ctx.fillText("Hot Chocolate Cake Recipe", -can.width, 15);
+        ctx.fillText("The Best in Town !!!", -can.width, 30);
+      
         ctx.restore();
         if (step == steps)
             step = 0;

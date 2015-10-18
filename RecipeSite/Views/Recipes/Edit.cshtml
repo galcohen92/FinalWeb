@@ -67,13 +67,13 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Categories, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div id="categories" class="col-md-10">
+                <div id="categoriesCheckBoxes" class="col-md-10">
                     @foreach (RecipeSite.Models.Category currentCategory in ViewBag.allCategories)
                     {
                         <input type="checkbox" id="category_@currentCategory.ID" value="@currentCategory.ID">@currentCategory.name
 
                     }
-                  
+
                 </div>
             </div>
 
@@ -121,7 +121,7 @@
 
         function addSelectedToList() {
             var selectedIds = "";
-            $('#categories input:checkbox').each(function () {
+            $('#categoriesCheckBoxes input:checkbox').each(function () {
                 if (this.checked) {
                     if (selectedIds != "") {
                         selectedIds += ",";

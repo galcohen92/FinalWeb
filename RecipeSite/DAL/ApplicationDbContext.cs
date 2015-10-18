@@ -22,7 +22,6 @@ namespace RecipeSite.DAL
         //public System.Data.Entity.DbSet<RecipeSite.Models.Ingredient> Ingredients { get; set; }
        // public System.Data.Entity.DbSet<RecipeSite.Models.User> Users { get; set; }
         public System.Data.Entity.DbSet<RecipeSite.Models.Category> Categories { get; set; }
-        public System.Data.Entity.DbSet<RecipeSite.Models.Categorization> Categorizations { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -33,14 +33,12 @@ font-size:4em;
 		padding-right: 22px;
     }
     
-#asideMenu{
-    background-color:lightgrey;
-}
+
 
 aside {
 		display: table-cell;
 		width: 20%;
-        
+         background-color:lightgrey;
         height:500px;
 		/*background: url('../images/sidebar_background.png') top left;*/
               /*-moz-box-sizing: border-box;
@@ -74,13 +72,13 @@ aside section {
 
 
 	aside section ul {
-		margin: 0 0 0 22px;
+		/*margin: 0 0 0 22px;*/
 		list-style: none;
 
 	}
 	
 		aside section ul li a {
-			display: block;
+			/*display: block;*/
 			text-decoration: none;
 			color: #000;
 		}
@@ -91,14 +89,14 @@ aside section {
 			}
 
       
-            canvas{
-                    height: 100px;
+            /*canvas{
+            
                 margin:auto;
     border: 1px solid #ddd;
-    width: 95%;
-    padding: 13px;
+
+    
     align-self:center
-            }
+            }*/
 
 /* Styles for basic forms
 -----------------------------------------------------------*/

@@ -1,6 +1,7 @@
 ﻿using RecipeSite.DAL;
 using RecipeSite.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,12 +22,20 @@ namespace RecipeSite.Controllers
         // TODO - add empty option and make it default 
         public static MultiSelectList GetDropDown()
         {
-            List<Category> categoriesList = new List<Category>();
-            var categories = db.Categories.Select(c => new
+            var categories = new ArrayList();
+            categories.Add(new
+            {
+                CategoryID = -1,
+                CategoryName = "All"
+            });
+            
+            categories.AddRange(db.Categories.Select(c => new
             {
                 CategoryID = c.ID,
                 CategoryName = c.name
-            }).ToList();
+            }).ToList());
+
+          
             return new MultiSelectList(categories, "CategoryID", "CategoryName");
         }
 
@@ -48,14 +57,21 @@ namespace RecipeSite.Controllers
 
             List<Recipe> recipesList = new List<Recipe>();
 
-            if (categories.Count() > 0)
+            if (categories.Count() > 0 )
             {
-                foreach(int id in categories){
-                    var temp = recipes.Where(x => x.Categories.Any(y => y.ID == id));
-                    recipesList.AddRange(temp.ToList());
+                if (categories[0] == -1)
+                {
+                    recipesList.AddRange(recipes.ToList());
                 }
-                
-;            }
+                else
+                {
+                    foreach (int id in categories)
+                    {
+                        var temp = recipes.Where(x => x.Categories.Any(y => y.ID == id));
+                        recipesList.AddRange(temp.ToList());
+                    }
+                }
+           }
 
             return View("../Recipes/Index", recipesList.ToList());
         }
@@ -78,6 +94,7 @@ namespace RecipeSite.Controllers
             return View();
         }
 
+        [ChildActionOnly]
         public ActionResult Aside()
         {
 
