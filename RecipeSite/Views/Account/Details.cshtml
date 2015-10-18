@@ -1,0 +1,77 @@
+﻿@model RecipeSite.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "category details";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Category</h4>
+        <hr />
+        <dl class="dl-horizontal"  >
+            <dt style="text-align:left">
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+
+            <dd style="text-align:left">
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+            <dt style="text-align:left">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd style="text-align:left">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt style="text-align:left">
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </dt>
+
+            <dd style="text-align:left">
+                @Html.DisplayFor(model => model.BirthDate)
+            </dd>
+            <dt style="text-align:left">
+                @Html.DisplayNameFor(model => model.City)
+            </dt>
+
+            <dd style="text-align:left">
+                @Html.DisplayFor(model => model.City)
+            </dd>
+            <dt style="text-align:left">
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+
+            <dd style="text-align:left">
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+            <dt style="text-align:left">
+                @Html.DisplayNameFor(model => model.Country)
+            </dt>
+            <dd style="text-align:left">
+                @Html.DisplayFor(model => model.Country)
+            </dd>
+
+            <dt style="text-align:left" >
+                @Html.DisplayName("Number of recipies")
+            </dt>
+
+            <dd style="text-align:left">
+                @Html.DisplayFor(model => model.UserRecipes.Count)
+            </dd>
+
+
+        </dl>
+    </div>
+    <p>
+        @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
