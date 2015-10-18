@@ -50,19 +50,6 @@
                 </div>
             </div>
     
-
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.Categories, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <select multiple id="categoriesSelect">
-                        @foreach (RecipeSite.Models.Category currentCategory in ViewBag.allCategories)
-                        {
-                            <option value="@currentCategory.ID"> @currentCategory.name</option>
-                        }
-                    </select>
-                </div>
-            </div>
-            <input type="hidden" id="selectedCategories" name="selectedCategories" value=" " />*@
             <input type="hidden" id="selectedCategories" name="selectedCategories" value=" " />
 
             <div class="form-group">
@@ -76,7 +63,6 @@
 
                 </div>
             </div>
-
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -99,26 +85,7 @@
                 $(checkId).prop("checked", true);
             }
         });
-
-        //function change() {
-
-        //}
-
-    @*$("#categoriesSelect").ready(function () {
-        @*alert("fdsfsdfds");
-            var list = JSON.parse('@Html.Raw(ViewBag.selectedIdsList)');
-            console.log();*@
-
-
-    @*var list = '@ViewBag.selectedIdsList';
-        var options = list.split(",");
-        for(var i in options) {
-            $("#categoriesSelect").find("option[value="+i+"]").prop("selected", "selected");
-        }*@
-    //var optionVal = selectedOptions[i];
-    @*$("#categoriesSelect").val(@ViewBag.selectedIdsList);*@
-    //});
-
+   
         function addSelectedToList() {
             var selectedIds = "";
             $('#categoriesCheckBoxes input:checkbox').each(function () {
@@ -133,10 +100,7 @@
 
             $("#selectedCategories").val(selectedIds);
         }
-    //function addSelectedToList() {
-    //    var selected = $('select[id=categoriesSelect]').val();
-    //    $("#selectedCategories").val(selected)
-    //}
+
     </script>
 </body>
 </html>

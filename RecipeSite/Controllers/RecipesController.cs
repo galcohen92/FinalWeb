@@ -95,7 +95,7 @@ namespace RecipeSite.Controllers
                     {
                         var categoryToAdd = db.Categories.Find(int.Parse(currentCategoryId.ToString()));
 
-                        db.Categories.Attach(categoryToAdd);
+                        //db.Categories.Attach(categoryToAdd);
                         recipe.Categories.Add(categoryToAdd);
                     }
                 }
@@ -153,86 +153,22 @@ namespace RecipeSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                //if (selectedCategories != null && !selectedCategories.Equals(""))
-                //{
-                //    string[] categoriesId = selectedCategories.Split(',');
-                //    //db.Entry(recipe)
-                //    //    .Collection(x => x.Categories)
-                //    //    .Load();
-                //    //List<Category> existed = recipe.Categories.ToList();
-                //    //db.Recipes.Find(recipe.ID).Categories.ToList().ForEach(c => ;
-                //   // Recipe beforeChange = db.Recipes.Find(recipe.ID);
-                //   //beforeChange.Categories.ToList().ForEach(cat =>
-                //   // {
-                //   //     cat.Recipes.Remove(beforeChange);
-                //   //     db.Entry(cat).State = EntityState.Detached;
-                //   // });
+                if (selectedCategories != null && !selectedCategories.Equals(""))
+                {
+                    db.Recipes.Find(recipe.ID).Categories.Clear();
+                    db.Recipes.Remove(db.Recipes.Find(recipe.ID));
+                    db.SaveChanges();
 
-                //    List<Category> categoriesBefore = db.Recipes.Find(recipe.ID).Categories.ToList();
+                    string[] categoriesId = selectedCategories.Split(',');
+                    recipe.Categories = new List<Category>();
+                    foreach (var currentCategoryId in categoriesId)
+                    {
+                        var categoryToAdd = db.Categories.Find(int.Parse(currentCategoryId.ToString()));
+                        recipe.Categories.Add(categoryToAdd);
+                    }
+                }
 
-                //    //db.Entry(recipe).State = EntityState.Deleted;
-                //    //db.SaveChanges();
-
-                //    recipe.Categories = db.Recipes.Find(recipe.ID).Categories.ToList();
-                //    foreach (var currentCategoryId in categoriesId)
-                //    {
-                //        var categoryToAdd = db.Categories.Find(int.Parse(currentCategoryId.ToString()));
-                //        if (!recipe.Categories.Contains(categoryToAdd))
-                //        {
-                //            recipe.Categories.Add(categoryToAdd);
-                //        }
-                //        //if (categoriesBefore.Contains(categoryToAdd))
-                //        //{
-                //        //    //recipe.Categories.Add(categoryToAdd);
-                //        //    //db.Entry(categoryToAdd).State = EntityState.Unchanged;
-                //        //    categoriesBefore.Remove(categoryToAdd);
-                //        //}
-                //        //else
-                //        //{
-                           
-                //        //}
-                //        //if (!existed.Contains(categoryToAdd))
-                //        //{
-                //        //db.Categories.Attach(categoryToAdd);
-                //        //    existed.Remove(categoryToAdd);
-                //        //}
-                        
-                        
-                //    }
-
-                //    recipe.Categories.ToList().ForEach(c =>
-                //    {
-                //        if (!categoriesId.Contains(c.ID.ToString()))
-                //        {
-                //            //item.Recipes.Clear();
-                //            recipe.Categories.Remove(c);
-                //        }
-                //    });
-
-                //    //foreach (var item in recipe.Categories)
-                //    //{
-                //    //    if (!categoriesId.Contains(item.ID.ToString()))
-                //    //    {
-                //    //        item.Recipes.Clear();
-                //    //        recipe.Categories.Remove(item);
-                //    //    }
-                //    //}
-
-                //    // Remove from db deleted
-                //    //foreach (var item in categoriesBefore)
-                //    //{
-                        
-                //    //}
-                //    //foreach (var item in existed)
-                //    //{
-                //    //    db.Categories.Remove(item);
-                //    //}
-
-                //}
-
-               
-
-                db.Entry(recipe).State = EntityState.Modified;
+                db.Recipes.Add(recipe);
                 db.SaveChanges();
                
                 return RedirectToAction("Index");

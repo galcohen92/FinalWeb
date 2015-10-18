@@ -22,8 +22,6 @@ namespace RecipeSite.Models
 
         public int likeAmount { get; set; }
 
-        //public IEnumerable<Ingredient> ingredients { get; set; }
-
         public virtual ICollection<Category> Categories { get; set; }
 
         [ForeignKey("userId")]

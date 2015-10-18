@@ -44,9 +44,9 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Private zone<span class="caret"></span></a>
                                 <ul class="dropdown-menu" style="font-size:inherit">
-                                    <li><a href="#">My profile</a></li>
+                                    <li>@Html.ActionLink("My profile", "Details", "Account", new { id = User.Identity.GetUserId() }, null)</li>
                                     <li>@Html.ActionLink("My recipes", "Index", "Recipes",  new {userId = User.Identity.GetUserId()},null)</li>
-                                </ul>
+                                    <li>@Html.ActionLink("My ingredients", "Index", "Ingredients", new { userId = User.Identity.GetUserId() }, null)</li>                                </ul>
                             </li>
                         </ul>
                         @Html.Partial("_LoginPartial")
