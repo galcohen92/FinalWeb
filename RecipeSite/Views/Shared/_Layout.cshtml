@@ -1,48 +1,19 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     @*<meta name="viewport" content="width=device-width, initial-scale=1.0">*@
-    
+
 
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
-    <script type="text/javascript">
-        var can, ctx, step, steps = 0,
-              delay = 20;
-
-        function init() {
-            can = document.getElementById("MyCanvas1");
-            ctx = can.getContext("2d");
-            ctx.fillStyle = "black";
-            ctx.font = "10pt Verdana";
-            ctx.textAlign = "end";
-            ctx.textBaseline = "middle";
-            step = 0;
-            steps = can.width + 50;
-            RunTextLeftToRight();
-        }
-
-        function RunTextLeftToRight() {
-            step++;
-            ctx.clearRect(0, 0, can.width, can.height);
-            ctx.save();
-            ctx.translate(step, can.height / 2);
-            ctx.fillText("welcome to Recipe Site !!!", 0, 0);
-            ctx.restore();
-            if (step == steps)
-                step = 0;
-            if (step < steps)
-                var t = setTimeout('RunTextLeftToRight()', delay);
-        }
-    </script>
 </head>
 <body onload="init();">
         <header>
             <div class="page-header">
-                <img style="width:100%" class="img-responsive " src="~/Upload/images/style/recipes-1.jpg" />
+                <img style="width:100%;height:auto" class="img-responsive " src="~/Upload/images/style/recipes-1.jpg" />
             </div>
 
 
@@ -59,24 +30,34 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("All Recipes", "Index", "Categories")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret" style="font:inherit"></span></a>
-                                <ul class="dropdown-menu" style="font-size:inherit">
-                                    <li>@Html.ActionLink("Manage Categories", "Index", "Categories")</li>
-                                    <li>@Html.ActionLink("Manage Users", "Index", "Account")</li>
-                                    <li>@Html.ActionLink("Manage Recipes", "Index", "Recipes")</li>
-                                </ul>
+                               @if (User.IsInRole("Admins"))
+                               {
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret" style="font:inherit"></span></a>
+                                    <ul class="dropdown-menu" style="font-size:inherit">
+                                        <li>@Html.ActionLink("Manage Categories", "Index", "Categories")</li>
+                                        <li>@Html.ActionLink("Manage Users", "Index", "Account")</li>
+                                        <li>@Html.ActionLink("Manage Recipes", "Index", "Recipes")</li>
+                                    </ul>
+                                </li>
+                               }
 
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Private zone<span class="caret"></span></a>
-                                <ul class="dropdown-menu" style="font-size:inherit">
-                                    <li><a href="#">My profile</a></li>
-                                    <li><a href="#">My recipes</a></li>
-                                </ul>
-                            </li>
+
+                                @if(User.IsInRole("Admins") || User.IsInRole("Users"))
+                                {
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Private zone<span class="caret"></span></a>
+                                        <ul class="dropdown-menu" style="font-size:inherit">
+                                            <li>@Html.ActionLink("My profile", "Details", "Account", new { id = User.Identity.GetUserId() }, null)</li>
+                                            <li>@Html.ActionLink("My recipes", "Index", "Recipes", new { userId = User.Identity.GetUserId() }, null)</li>
+                                            <li>@Html.ActionLink("My ingredients", "Index", "Ingredients", new { userId = User.Identity.GetUserId() }, null)</li>
+                                        </ul>
+                                    </li>
+                                }
+                            
+                           
                         </ul>
                         @Html.Partial("_LoginPartial")
                     </div>
@@ -84,44 +65,49 @@
             </div>
         </nav>
 
-    <div class="subdiv">
-        <canvas id="MyCanvas1" width="1500" height="30">
-            This browser or document mode doesn't support canvas object
-        </canvas>
-    </div>
-
         <div id="content">
+                @{Html.RenderAction("Aside", "Home");}
+            
+          
+            <div align="left" style="margin-right:20px"  role="search">
+                @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+                {
+                    <p>
+                        <span iclass="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        Title: @Html.TextBox("recipeTitle")
+                        UserName: @Html.TextBox("userName")
+                        Category: @Html.DropDownList("categories", RecipeSite.Controllers.HomeController.GetDropDown(), new { @class = "chzn-select", data_placeholder = "Choose  food categories..." })
+                        @*<input type="submit" class="glyphicon glyphicon-search" />*@
+                        <button type="submit" class="btn btn-default">Go!</button>
 
-            <aside class="col-lg-3 hidden-xs">
-                <section>
-                    <header>
-                        <h3>Top 5 Recipes</h3>
-                    </header>
-                    <ul>
-                        <li><a href="#">Lorem ipsum dolor</a></li>
-                        <li><a href="#">Sit amet consectetur</a></li>
-                        <li><a href="#">Adipisicing elit sed</a></li>
-                    </ul>
-                </section>
-                <section>
-                    <header>
-                        <h3>Popular Users</h3>
-                    </header>
-                    <ul>
-                        <li><a href="#">December 2008</a></li>
-                        <li><a href="#">January 2009</a></li>
-                        <li><a href="#">February 2009</a></li>
-                        <li><a href="#">March 2009</a></li>
-                    </ul>
-                </section>
-            </aside>
-            <div id="mainContent" class="col-lg-9 ">
+                    </p>
+                }
+            </div>
+
+            <div id="mainContent" class="col-md-9">
                 <section>
                     @RenderBody()
                 </section>
             </div>
+            @*<div id="rightSide" class="col-md-2 hidden-xs ">
+                <div align="right">
+                    @using (Html.BeginForm("Search", "Home", FormMethod.Post))
+                    {
+                        <p>
+                            Title: @Html.TextBox("recipeTitle") <br />
+                            UserName: @Html.TextBox("userName") <br />                           
+                            Category: @Html.DropDownList("categories", RecipeSite.Controllers.HomeController.GetDropDown(), new { @class = "chzn-select", data_placeholder = "Choose  food categories..." }) <br/>
+                             <input type="submit" value="Filter" />
+                        </p>
+                    }
+                </div>
+                
+                <div class="fb-page" data-width="250" data-href="https://www.facebook.com/recipeSiteWeb?ref=aymt_homepage_panel" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/recipeSiteWeb?ref=aymt_homepage_panel"><a href="https://www.facebook.com/recipeSiteWeb?ref=aymt_homepage_panel">RecipeSite</a></blockquote></div></div>
+
+               
+            </div>*@
         </div>
-        <footer style="background-color:grey;font-size:medium">
+        <footer style="background-color:grey;font-size:medium;align-self:flex-end">
             <p>©All right received to Adi & Yarden & Gal </p>
         </footer>
 
@@ -129,5 +115,35 @@
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)
+
+    @*<div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=818834374895942";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    <script>
+    FB.init({
+        appId: '818834374895942'
+    });
+    </script>*@
+
+    <div id="fb-root"></div>
+    <script>
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=818834374895942";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
 </body>
 </html>

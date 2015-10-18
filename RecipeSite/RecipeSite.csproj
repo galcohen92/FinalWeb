@@ -167,6 +167,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510151912555_init.cs" />
+    <Compile Include="Migrations\201510151912555_init.Designer.cs">
+      <DependentUpon>201510151912555_init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -182,19 +186,20 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Fonts\SIL Open Font License.txt" />
     <Content Include="Content\images\Heart_icon_red_hollow.png" />
     <Content Include="Content\images\no-image.png" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site1.css" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\Fonts\Artifika-Regular.ttf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -210,6 +215,10 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Upload\Images\Style\recipes-1.jpg" />
+    <Content Include="Upload\Images\Style\news1.dib" />
+    <Content Include="Upload\Images\Style\news.dib" />
+    <Content Include="Upload\Images\Style\news2.dib" />
+    <Content Include="Upload\Images\Style\news3.dib" />
     <Content Include="Upload\Videos\karinGoren.mp4" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -224,8 +233,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
@@ -254,6 +261,9 @@
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Home\Aside.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -263,6 +273,11 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201510151912555_init.resx">
+      <DependentUpon>201510151912555_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -282,7 +297,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2545</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:2545/</IISUrl>
+          <IISUrl>https://localhost:44300/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

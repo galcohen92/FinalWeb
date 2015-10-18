@@ -1,6 +1,7 @@
 ﻿using RecipeSite.DAL;
 using RecipeSite.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,24 +9,76 @@ using System.Web.Mvc;
 
 namespace RecipeSite.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
-        ApplicationDbContext db = new ApplicationDbContext();
+        static ApplicationDbContext db = new ApplicationDbContext();
         
         public ActionResult Index()
         {
             return View();
         }
 
+        // TODO - add empty option and make it default 
+        public static MultiSelectList GetDropDown()
+        {
+            var categories = new ArrayList();
+            categories.Add(new
+            {
+                CategoryID = -1,
+                CategoryName = "All"
+            });
+            
+            categories.AddRange(db.Categories.Select(c => new
+            {
+                CategoryID = c.ID,
+                CategoryName = c.name
+            }).ToList());
+
+          
+            return new MultiSelectList(categories, "CategoryID", "CategoryName");
+        }
+
+        // TODO - make with category object
+        public ActionResult Search(string recipeTitle, int[] categories, string userName)
+        {
+            var recipes = from m in db.Recipes
+                         select m;
+
+            if (!String.IsNullOrEmpty(recipeTitle))
+            {
+                recipes = recipes.Where(s => s.title.Contains(recipeTitle));
+            }
+
+            if (!String.IsNullOrEmpty(userName))
+            {
+                recipes = recipes.Where(s => s.author.UserName.Contains(userName));
+            }
+
+            List<Recipe> recipesList = new List<Recipe>();
+
+            if (categories.Count() > 0 )
+            {
+                if (categories[0] == -1)
+                {
+                    recipesList.AddRange(recipes.ToList());
+                }
+                else
+                {
+                    foreach (int id in categories)
+                    {
+                        var temp = recipes.Where(x => x.Categories.Any(y => y.ID == id));
+                        recipesList.AddRange(temp.ToList());
+                    }
+                }
+           }
+
+            return View("../Recipes/Index", recipesList.ToList());
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
             //ViewBag.Message = "Your contact page.";
 
             //IList<ApplicationUser> users = new List<ApplicationUser>();
@@ -38,7 +91,12 @@ namespace RecipeSite.Controllers
             //{
             //    users.Add(new ApplicationUser(){UserName = item});
             //}
+            return View();
+        }
 
+        [ChildActionOnly]
+        public ActionResult Aside()
+        {
 
             IList<ApplicationUser> users = new List<ApplicationUser>();
 
@@ -54,6 +112,11 @@ namespace RecipeSite.Controllers
             }
 
             return View(users.ToList());
+        }
+
+        public ActionResult Contact()
+        {
+            return View();   
         }
     }
 }

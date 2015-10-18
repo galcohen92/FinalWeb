@@ -12,17 +12,18 @@ namespace RecipeSite.Models
     {
         public int ID { get; set; }
 
+        [Required]
         public string userId { get; set; }
 
+        [Required]
         public String title { get; set; }
 
+        [Required]
         public String content { get; set; }
 
         public String image { get; set; }
 
         public int likeAmount { get; set; }
-
-        //public IEnumerable<Ingredient> ingredients { get; set; }
 
         public virtual ICollection<Category> Categories { get; set; }
 

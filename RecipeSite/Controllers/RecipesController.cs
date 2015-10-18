@@ -18,10 +18,17 @@ namespace RecipeSite.Controllers
 
         //[Authorize(Roles = "admin")]
         // GET: Recipes
-        public ActionResult Index()
+        public ActionResult Index(string userId)
         {
-            var recipes = db.Recipes;//.Include(r => r.author);
-            return View(recipes.ToList());
+            if (userId != null)
+            {
+                var recipes = db.Recipes.Where(r => r.userId.Equals(userId));
+                return View(recipes.ToList());
+            }
+            else {
+                var recipes = db.Recipes; 
+                return View(recipes.ToList());
+            }
         }
 
         public ActionResult IndexByCategory(int? categoryId)
@@ -75,6 +82,10 @@ namespace RecipeSite.Controllers
                     upload.SaveAs(imagePath);
                     recipe.image = "/Upload/Images/recipes/" + imageName;
                 }
+                else
+                {
+                    recipe.image = "/Content/images/no-image.png";
+                }
 
                 if (selectedCategories != null && !selectedCategories.Equals(""))
                 {
@@ -84,7 +95,7 @@ namespace RecipeSite.Controllers
                     {
                         var categoryToAdd = db.Categories.Find(int.Parse(currentCategoryId.ToString()));
 
-                        db.Categories.Attach(categoryToAdd);
+                        //db.Categories.Attach(categoryToAdd);
                         recipe.Categories.Add(categoryToAdd);
                     }
                 }
@@ -101,6 +112,7 @@ namespace RecipeSite.Controllers
         // GET: Recipes/Edit/5
         public ActionResult Edit(int? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -111,6 +123,24 @@ namespace RecipeSite.Controllers
                 return HttpNotFound();
             }
             ViewBag.userId = new SelectList(db.Users, "ID", "firstName", recipe.userId);
+            ViewBag.allCategories = db.Categories.ToList();
+            string idsArr = "";
+            foreach (var item in recipe.Categories)
+	        {
+		        idsArr += item.ID + ",";
+	        }
+
+            if (idsArr.Length > 0)
+            {
+                idsArr = idsArr.Remove(idsArr.Length-1);
+            }
+            //List<int> ids = recipe.Categories
+            //                        .Select(x => x.ID)
+            //                        .ToList();
+            ////ViewBag.selectedIdsList = recipe.Categories
+            //                        .Select(x => x.ID)
+            //                        .ToList(); 
+            ViewBag.selectedIdsList = idsArr.ToString();
             return View(recipe);
         }
 
@@ -119,12 +149,28 @@ namespace RecipeSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,userId,title,content,image,likeAmount")] Recipe recipe)
+        public ActionResult Edit([Bind(Include = "ID,userId,title,content,image,likeAmount")] Recipe recipe, string selectedCategories)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(recipe).State = EntityState.Modified;
+                if (selectedCategories != null && !selectedCategories.Equals(""))
+                {
+                    db.Recipes.Find(recipe.ID).Categories.Clear();
+                    db.Recipes.Remove(db.Recipes.Find(recipe.ID));
+                    db.SaveChanges();
+
+                    string[] categoriesId = selectedCategories.Split(',');
+                    recipe.Categories = new List<Category>();
+                    foreach (var currentCategoryId in categoriesId)
+                    {
+                        var categoryToAdd = db.Categories.Find(int.Parse(currentCategoryId.ToString()));
+                        recipe.Categories.Add(categoryToAdd);
+                    }
+                }
+
+                db.Recipes.Add(recipe);
                 db.SaveChanges();
+               
                 return RedirectToAction("Index");
             }
             ViewBag.userId = new SelectList(db.Users, "ID", "firstName", recipe.userId);
@@ -160,17 +206,16 @@ namespace RecipeSite.Controllers
         // POST: Recipes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddLike(int? id)
+        //[HttpPost]
+        public ActionResult AddLike(int? id, string actionName)
         {
             Recipe recipe = db.Recipes.Find(id);
             recipe.likeAmount++;
             db.Entry(recipe).State = EntityState.Modified;
        
-                db.Entry(recipe).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+            db.Entry(recipe).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction(actionName, new { id = id });
         }
 
         protected override void Dispose(bool disposing)

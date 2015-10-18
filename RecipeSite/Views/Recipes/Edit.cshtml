@@ -25,15 +25,8 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.ID)
-    
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.userId, "userId", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("userId", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.userId, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-    
+            @Html.HiddenFor(model => model.userId)
+           
             <div class="form-group">
                 @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -58,17 +51,23 @@
                 </div>
             </div>
     
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.likeAmount, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.likeAmount, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.likeAmount, "", new { @class = "text-danger" })
+            <input type="hidden" id="selectedCategories" name="selectedCategories" value=" " />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Categories, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div id="categoriesCheckBoxes" class="col-md-10">
+                    @foreach (RecipeSite.Models.Category currentCategory in ViewBag.allCategories)
+                    {
+                        <input type="checkbox" id="category_@currentCategory.ID" value="@currentCategory.ID">@currentCategory.name
+
+                    }
+
                 </div>
-            </div>*@
-    
+            </div>
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="Edit" onclick="addSelectedToList()" class="btn btn-default" />
                 </div>
             </div>
         </div>
@@ -77,6 +76,33 @@
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var list = '@ViewBag.selectedIdsList';
+            var options = list.split(",");
+            for (var i in options) {
+                var checkId = '#category_' + options[i];
+                $(checkId).prop("checked", true);
+            }
+        });
+   
+        function addSelectedToList() {
+            var selectedIds = "";
+            $('#categoriesCheckBoxes input:checkbox').each(function () {
+                if (this.checked) {
+                    if (selectedIds != "") {
+                        selectedIds += ",";
+                    }
+
+                    selectedIds += $(this).val();
+                }
+            });
+
+            $("#selectedCategories").val(selectedIds);
+        }
+
+    </script>
 </body>
 </html>
 

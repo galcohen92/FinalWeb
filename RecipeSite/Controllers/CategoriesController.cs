@@ -19,7 +19,7 @@ namespace RecipeSite.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            return View(db.Recipes.ToList());
+            return View(db.Categories.ToList());
         }
 
         // GET: Categories/Details/5
