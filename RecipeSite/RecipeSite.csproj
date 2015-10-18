@@ -213,6 +213,10 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Upload\Images\Style\recipes-1.jpg" />
+    <Content Include="Upload\Images\Style\news1.dib" />
+    <Content Include="Upload\Images\Style\news.dib" />
+    <Content Include="Upload\Images\Style\news2.dib" />
+    <Content Include="Upload\Images\Style\news3.dib" />
     <Content Include="Upload\Videos\karinGoren.mp4" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

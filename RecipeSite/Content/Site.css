@@ -21,15 +21,26 @@ font-size:4em;
 
 	#mainContent {
 		display: table-cell;
-		width: 70%;
+		width: 60%;
 		padding-right: 22px;
          
 	}
+    #rightSide{
+        display: table-cell;
+		width: 20%;
+        float: right;
+
+		padding-right: 22px;
+    }
+    
+#asideMenu{
+    background-color:lightgrey;
+}
 
 aside {
 		display: table-cell;
 		width: 20%;
-        background-color:lightgrey;
+        
         height:500px;
 		/*background: url('../images/sidebar_background.png') top left;*/
               /*-moz-box-sizing: border-box;
@@ -41,7 +52,7 @@ aside {
     /*margin-bottom:10px;
     margin-top:10px;*/
 	}
-footer {position: relative; bottom: 0;}
+footer {display:block; position: relative; bottom: 0;width:100%}
 
 /*------------------------------
 =SIDEBAR
@@ -77,7 +88,12 @@ aside section {
 
       
             canvas{
-                /*margin: 0 0 0 22px;*/
+                    height: 100px;
+                margin:auto;
+    border: 1px solid #ddd;
+    width: 95%;
+    padding: 13px;
+    align-self:center
             }
 
 /* Styles for basic forms

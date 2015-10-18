@@ -4,28 +4,36 @@
 }           
 
 <aside class="col-lg-3 hidden-xs " >
-    <section style="margin:20px;width:100%;height:50%;">
-        <header>
-            <h3>Popular Users</h3>
-        </header>
-        <ul>
-            @foreach (var item in Model)
-            {
-                <li>@Html.DisplayFor(modelItem => item.UserName)</li>
-            }
-        </ul>
-    </section>
-    <section style="margin-left:20px;width:100%;height:50%;">
-        <header>
-            <h3>Most Helathy foods</h3>
-        </header>
-        
-        <canvas id="MyCanvas1" onload="init();" style="margin-left:20px;text-align:left">
+
+    <div style="margin:10px">
+        <img style="width:95%" src="~/Upload/Images/Style/news3.dib" />
+        <canvas id="MyCanvas1" onload="init();" >
             This browser or document mode doesn't support canvas object
         </canvas>
-       
+    </div>
+    <div class="fb-like" data-href="https://www.facebook.com/recipeSiteWeb?ref=aymt_homepage_panel" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+
+    <section id="asideMenu" style="height:100%">
+        <section style="margin:20px;width:100%;height:50%;">
+            <header>
+                <h3>Popular Users</h3>
+            </header>
+            <ul>
+                @foreach (var item in Model)
+                {
+                    <li>@Html.DisplayFor(modelItem => item.UserName)</li>
+                }
+            </ul>
+        </section>
+        <section style="width:100%;height:50%;">
+            <header>
+                <h3>Most Helathy foods</h3>
+            </header>
+
+
+
+        </section>
     </section>
-  
 </aside>
 
 <script type="text/javascript">
@@ -50,13 +58,9 @@
         ctx.clearRect(0, 0, can.width, can.height);
         ctx.save();
         ctx.translate(can.width , step);
-        ctx.fillText("Apples -  an excellent source of antioxidants,", 5, 0);
-        ctx.fillText("which combat free radicals!", 5, 15);
-        ctx.fillText("Almonds -  rich in nutrients, including magnesium", 5, 30);
-        ctx.fillText("vitamin E, iron, calcium, fiber, and riboflavin!", 5, 45);
-        ctx.fillText("Broccoli -  rich in fiber, calcium and potassium", 5, 60);
-        ctx.fillText("Phytonutrients are compounds which reduce the", 5, 75);
-        ctx.fillText("risk of developing heart disease", 5, 90);
+        ctx.fillText("NEW!!!", 5, 0);
+        ctx.fillText("Hot Chocolate Cake Recipe", 5, 15);
+        ctx.fillText("The Best in Town !!!", 5, 30);
         ctx.restore();
         if (step == steps)
             step = 0;
