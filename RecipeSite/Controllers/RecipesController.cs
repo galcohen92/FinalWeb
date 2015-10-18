@@ -18,10 +18,17 @@ namespace RecipeSite.Controllers
 
         //[Authorize(Roles = "admin")]
         // GET: Recipes
-        public ActionResult Index()
+        public ActionResult Index(string userId)
         {
-            var recipes = db.Recipes;//.Include(r => r.author);
-            return View(recipes.ToList());
+            if (userId != null)
+            {
+                var recipes = db.Recipes.Where(r => r.userId.Equals(userId));
+                return View(recipes.ToList());
+            }
+            else {
+                var recipes = db.Recipes; 
+                return View(recipes.ToList());
+            }
         }
 
         public ActionResult IndexByCategory(int? categoryId)
