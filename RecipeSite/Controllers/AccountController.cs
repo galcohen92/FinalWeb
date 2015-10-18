@@ -13,6 +13,7 @@ using Owin;
 using RecipeSite.Models;
 using RecipeSite.DAL;
 using System.Net;
+using System.Collections;
 
 namespace RecipeSite.Controllers
 {
@@ -20,7 +21,7 @@ namespace RecipeSite.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private static ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -49,6 +50,56 @@ namespace RecipeSite.Controllers
             return View(users.ToList());
         }
 
+        public static SelectList GetDropDown()
+        {
+            var roles = new ArrayList();
+            roles.Add(new
+            {
+                roleId = -1,
+                roleName = String.Empty
+            });
+
+            roles.AddRange(db.Roles.Select(c => new
+            {
+                roleId = c.Id,
+                roleName = c.Name
+            }).ToList());
+
+            return new SelectList(roles, "roleId", "roleName");
+        }
+
+        public ActionResult Search(string roleId, string userName, string email)
+        {
+            var users = from m in db.Users
+                        select m;
+
+            if (!String.IsNullOrEmpty(userName))
+            {
+                users = users.Where(s => s.UserName.Contains(userName));
+            }
+
+            if (!String.IsNullOrEmpty(email))
+            {
+                users = users.Where(s => s.Email.Contains(email));
+            }
+
+            if (!roleId.Equals("-1"))
+            {
+                users = users.Where(s => s.Roles.Any(x => x.RoleId == roleId));
+            }
+
+            List<UserRoleView> usersList = new List<UserRoleView>();
+            foreach (var item in users.ToList())
+            {
+                foreach(var roleItem in item.Roles.ToList())
+                {
+                    usersList.Add(new UserRoleView() { UserID = item.Id, Email = item.Email, Role = db.Roles.Find(roleItem.RoleId).Name, UserName = item.UserName });
+
+                }
+            }
+
+            return View("../Account/Index", usersList.ToList());
+        }
 
         // GET: Account/Delete/5
         public ActionResult Delete(string id)
