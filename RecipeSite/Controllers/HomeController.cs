@@ -8,13 +8,56 @@ using System.Web.Mvc;
 
 namespace RecipeSite.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
-        ApplicationDbContext db = new ApplicationDbContext();
+        static ApplicationDbContext db = new ApplicationDbContext();
         
         public ActionResult Index()
         {
             return View();
+        }
+
+        // TODO - add empty option and make it default 
+        public static MultiSelectList GetDropDown()
+        {
+            List<Category> categoriesList = new List<Category>();
+            var categories = db.Categories.Select(c => new
+            {
+                CategoryID = c.ID,
+                CategoryName = c.name
+            }).ToList();
+            return new MultiSelectList(categories, "CategoryID", "CategoryName");
+        }
+
+        // TODO - make with category object
+        public ActionResult Search(string recipeTitle, int[] categories, string userName)
+        {
+            var recipes = from m in db.Recipes
+                         select m;
+
+            if (!String.IsNullOrEmpty(recipeTitle))
+            {
+                recipes = recipes.Where(s => s.title.Contains(recipeTitle));
+            }
+
+            if (!String.IsNullOrEmpty(userName))
+            {
+                recipes = recipes.Where(s => s.author.UserName.Contains(userName));
+            }
+
+            List<Recipe> recipesList = new List<Recipe>();
+
+            if (categories.Count() > 0)
+            {
+                foreach(int id in categories){
+                    var temp = recipes.Where(x => x.Categories.Any(y => y.ID == id));
+                    recipesList.AddRange(temp.ToList());
+                }
+                
+;            }
+
+            return View("../Recipes/Index", recipesList.ToList());
         }
 
         public ActionResult About()
