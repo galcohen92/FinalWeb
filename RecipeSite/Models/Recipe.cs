@@ -12,10 +12,13 @@ namespace RecipeSite.Models
     {
         public int ID { get; set; }
 
+        [Required]
         public string userId { get; set; }
 
+        [Required]
         public String title { get; set; }
 
+        [Required]
         public String content { get; set; }
 
         public String image { get; set; }

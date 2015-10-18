@@ -32,22 +32,32 @@
                         <ul class="nav navbar-nav">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("All Recipes", "Index", "Categories")</li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret" style="font:inherit"></span></a>
-                                <ul class="dropdown-menu" style="font-size:inherit">
-                                    <li>@Html.ActionLink("Manage Categories", "Index", "Categories")</li>
-                                    <li>@Html.ActionLink("Manage Users", "Index", "Account")</li>
-                                    <li>@Html.ActionLink("Manage Recipes", "Index", "Recipes")</li>
-                                </ul>
+                               @if (User.IsInRole("Admins"))
+                               {
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret" style="font:inherit"></span></a>
+                                    <ul class="dropdown-menu" style="font-size:inherit">
+                                        <li>@Html.ActionLink("Manage Categories", "Index", "Categories")</li>
+                                        <li>@Html.ActionLink("Manage Users", "Index", "Account")</li>
+                                        <li>@Html.ActionLink("Manage Recipes", "Index", "Recipes")</li>
+                                    </ul>
+                                </li>
+                               }
 
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Private zone<span class="caret"></span></a>
-                                <ul class="dropdown-menu" style="font-size:inherit">
-                                    <li>@Html.ActionLink("My profile", "Details", "Account", new { id = User.Identity.GetUserId() }, null)</li>
-                                    <li>@Html.ActionLink("My recipes", "Index", "Recipes",  new {userId = User.Identity.GetUserId()},null)</li>
-                                    <li>@Html.ActionLink("My ingredients", "Index", "Ingredients", new { userId = User.Identity.GetUserId() }, null)</li>                                </ul>
-                            </li>
+
+                                @if(User.IsInRole("Admins") || User.IsInRole("Users"))
+                                {
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Private zone<span class="caret"></span></a>
+                                        <ul class="dropdown-menu" style="font-size:inherit">
+                                            <li>@Html.ActionLink("My profile", "Details", "Account", new { id = User.Identity.GetUserId() }, null)</li>
+                                            <li>@Html.ActionLink("My recipes", "Index", "Recipes", new { userId = User.Identity.GetUserId() }, null)</li>
+                                            <li>@Html.ActionLink("My ingredients", "Index", "Ingredients", new { userId = User.Identity.GetUserId() }, null)</li>
+                                        </ul>
+                                    </li>
+                                }
+                            
+                           
                         </ul>
                         @Html.Partial("_LoginPartial")
                     </div>
