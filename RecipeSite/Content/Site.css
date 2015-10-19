@@ -22,7 +22,7 @@ font-size:4em;
 }
 
 #content {
-	display: table;
+	display: flex;
     width:100%;
      height: 100%;
 }
@@ -233,5 +233,20 @@ dd{
     -webkit-column-rule-color:gray;
 }
 
+textarea{
+    overflow-y: scroll;
+    height:200px !important;
+}
+
+/*a.navLink {
+    color:blue !important;
+    font-weight: initial;
+
+    transition: color 2s;
+}
+
+a.navLink :hover{
+   color: red !important;
+}*/
 
 

@@ -26,8 +26,8 @@
     <div class="row">
         @foreach (var item in Model)
         {
-            <div class="col-sm-6 col-md-4" >
-                <div class="thumbnail" style="padding-bottom:10px;">
+            <div class="col-sm-6 col-md-3" >
+                <div class="thumbnail" style="padding-bottom:10px;margin-bottom:0px;">
                     <h3>@Html.DisplayFor(modelItem => item.title)<small>@Html.DisplayFor(modelItem => item.author.UserName)</small></h3>
                     <a href="@Url.Action("Details", "Recipes", new { id = item.ID }) "><img src="@item.image" alt="no image" /></a>
                     <div class="caption">
