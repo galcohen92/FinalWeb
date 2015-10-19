@@ -1,5 +1,8 @@
 namespace RecipeSite.Migrations
 {
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using RecipeSite.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -14,18 +17,108 @@ namespace RecipeSite.Migrations
 
         protected override void Seed(RecipeSite.DAL.ApplicationDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            //-----------Insert roles------------
+            if (!context.Roles.Any(r => r.Name == "Admins"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "Admins" };
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+                manager.Create(role);
+            }
+            if (!context.Roles.Any(r => r.Name == "Users"))
+            {
+                var store = new RoleStore<IdentityRole>(context);
+                var manager = new RoleManager<IdentityRole>(store);
+                var role = new IdentityRole { Name = "Users" };
+
+                manager.Create(role);
+            }
+
+
+            //-----------Insert users------------
+            if (!context.Users.Any(u => u.UserName == "admin"))
+            {
+                var store = new UserStore<ApplicationUser>(context);
+                var manager = new UserManager<ApplicationUser>(store);
+                var user = new ApplicationUser { UserName = "admin" };
+
+                manager.Create(user, "123456");
+                manager.AddToRole(user.Id, "Admins");
+            }
+            if (!context.Users.Any(u => u.UserName == "Users"))
+            {
+                var store = new UserStore<ApplicationUser>(context);
+                var manager = new UserManager<ApplicationUser>(store);
+
+                var user1 = new ApplicationUser { UserName = "gal", Email = "gal@gmail.com" };
+                manager.Create(user1, "123456");
+                manager.AddToRole(user1.Id, "Users");
+
+                var user2 = new ApplicationUser { UserName = "yarden", Email = "yarden@gmail.com" };
+                manager.Create(user2, "123456");
+                manager.AddToRole(user2.Id, "Users");
+
+                var user3 = new ApplicationUser { UserName = "adi", Email = "adi@gmail.com" };
+                manager.Create(user3, "123456");
+                manager.AddToRole(user3.Id, "Users");
+
+                var user4 = new ApplicationUser { UserName = "gabi", Email = "gabi@gmail.com" };
+                manager.Create(user4, "123456");
+                manager.AddToRole(user4.Id, "Users");
+                
+                var user5 = new ApplicationUser { UserName = "moshe", Email = "moshe@gmail.com" };
+                manager.Create(user5, "123456");
+                manager.AddToRole(user5.Id, "Users");
+
+                var user6 = new ApplicationUser { UserName = "yoseff", Email = "yoseff@gmail.com" };
+                manager.Create(user6, "123456");
+                manager.AddToRole(user6.Id, "Users");
+            }
+
+            //-----------Insert categories------------
+            context.Categories.AddOrUpdate(x => x.ID,
+       new Category() { ID = 1, name = "Meat", imageUrl = "/Upload/Images/Categories/meat.jpg" },
+        new Category() { ID = 2, name = "Dessert", imageUrl = "/Upload/Images/Categories/dessert.jpg" },
+         new Category() { ID = 3, name = "Pasta", imageUrl = "/Upload/Images/Categories/pasta.jpg" },
+         new Category() { ID = 4, name = "Bread", imageUrl = "/Upload/Images/Categories/bread.jpg" },
+         new Category() { ID = 5, name = "Diet", imageUrl = "/Upload/Images/Categories/diet.jpg" },
+         new Category() { ID = 6, name = "Fish", imageUrl = "/Upload/Images/Categories/fish.jpg" },
+         new Category() { ID = 7, name = "Slow Cooker", imageUrl = "/Upload/Images/Categories/slow_cooker.jpg" },
+         new Category() { ID = 8, name = "Soup", imageUrl = "/Upload/Images/Categories/soup.jpg" },
+         new Category() { ID = 9, name = "Vegetarian", imageUrl = "/Upload/Images/Categories/vegeterian.jpg" },
+         new Category() { ID = 10, name = "Chicken", imageUrl = "/Upload/Images/Categories/chicken.jpg" },
+         new Category() { ID = 11, name = "Gluten Free", imageUrl = "/Upload/Images/Categories/gluten_free.jpg" });
+
+            //-----------Insert recipes------------
+            //           context.Categories.AddOrUpdate(x => x.ID,
+            //new Category() { ID = 1, name = "Meat", imageUrl = "/Upload/Images/Categories/meat.jpg" },
+            // new Category() { ID = 2, name = "Dessert", imageUrl = "/Upload/Images/Categories/dessert.jpg" },
+            //  new Category() { ID = 3, name = "Pasta", imageUrl = "/Upload/Images/Categories/pasta.jpg" },
+            //  new Category() { ID = 4, name = "Bread", imageUrl = "/Upload/Images/Categories/bread.jpg" },
+            //  new Category() { ID = 5, name = "Diet", imageUrl = "/Upload/Images/Categories/diet.jpg" },
+            //  new Category() { ID = 6, name = "Fish", imageUrl = "/Upload/Images/Categories/fish.jpg" },
+            //  new Category() { ID = 7, name = "Slow Cooker", imageUrl = "/Upload/Images/Categories/slow_cooker.jpg" },
+            //  new Category() { ID = 8, name = "Soup", imageUrl = "/Upload/Images/Categories/soup.jpg" },
+            //  new Category() { ID = 9, name = "Vegetarian", imageUrl = "/Upload/Images/Categories/vegeterian.jpg" },
+            //  new Category() { ID = 10, name = "Chicken", imageUrl = "/Upload/Images/Categories/chicken.jpg" },
+            //  new Category() { ID = 11, name = "Gluten Free", imageUrl = "/Upload/Images/Categories/gluten_free.jpg" });
+
+            //-----------Insert ingredients------------
+            //    context.Categories.AddOrUpdate(x => x.ID,
+            //new Ingredient() { ID = 1, Name = "Egg", Fat="",Calories="",
+            //new Ingredient() { ID = 2, Name= "Bread"
+            //new Ingredient() { ID = 3, Name= "Water
+            //new Ingredient() { ID = 4, Name= "Brea
+            //new Ingredient() { ID = 5, Name= "Diet
+            //new Ingredient() { ID = 6, Name= "Fish
+            //new Ingredient() { ID = 7, Name= "Slow
+            //new Ingredient() { ID = 8, Name= "Soup
+            //new Ingredient() { ID = 9, Name= "Vege
+            //new Ingredient() { ID = 10,Name = "Chi
+            //new Ingredient() { ID = 11,Name = "Glu
+
+            context.SaveChanges();
         }
     }
 }
