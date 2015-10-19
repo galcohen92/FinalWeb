@@ -60,6 +60,10 @@ namespace RecipeSite.Controllers
                     upload.SaveAs(picPath);
                     category.imageUrl = "/Upload/Images/Categories/" + picName;
                 }
+                else
+                {
+                    category.imageUrl = "/Content/images/no-image.png";
+                }
 
                 db.Categories.Add(category);
                 db.SaveChanges();
@@ -100,6 +104,10 @@ namespace RecipeSite.Controllers
                        Server.MapPath("~/Upload/Images/Categories"), picName);
                     upload.SaveAs(picPath);
                     category.imageUrl = "/Upload/Images/Categories/" + picName;
+                }
+                else
+                {
+                    category.imageUrl = "/Content/images/no-image.png";
                 }
                 db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
