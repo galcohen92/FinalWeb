@@ -89,8 +89,8 @@ namespace RecipeSite.Controllers
 
             var query = from r in db.Recipes
                         group r by r.userId into m
-                        orderby m.Count() descending
                         join u in db.Users on m.Key equals u.Id
+                        orderby m.Count() descending
                         select u.UserName;
             //var UserRole = db.Users.Join(db.Roles, u => u.Id, r => r, new UserRoleView() { UserID = item.Id, Email = item.Email, Role = item.Role, UserName = item.Name });
             foreach (var item in query.ToList().Distinct().Take(5))
