@@ -18,8 +18,9 @@ namespace RecipeSite.DAL
         {
         }
 
-        public System.Data.Entity.DbSet<RecipeSite.Models.Recipe> Recipes { get; set; }
         public System.Data.Entity.DbSet<RecipeSite.Models.Category> Categories { get; set; }
+        public System.Data.Entity.DbSet<RecipeSite.Models.Recipe> Recipes { get; set; }
+        
         public System.Data.Entity.DbSet<RecipeSite.Models.Ingredient> Ingredients { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
