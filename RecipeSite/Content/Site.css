@@ -227,5 +227,11 @@ dd{
     font-family: artifika;
 }
 
+.caloriesFacts{
+    -webkit-column-count: 3;
+    -webkit-column-rule-style: dotted;
+    -webkit-column-rule-color:gray;
+}
+
 
 

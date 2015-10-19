@@ -78,19 +78,6 @@ namespace RecipeSite.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-            //ViewBag.Message = "Your contact page.";
-
-            //IList<ApplicationUser> users = new List<ApplicationUser>();
-            //var query = from r in db.Recipes
-            //            join u in db.Users on r.userId equals u.Id
-            //            orderby r.likeAmount descending
-            //            select u.UserName;
-            ////var UserRole = db.Users.Join(db.Roles, u => u.Id, r => r, new UserRoleView() { UserID = item.Id, Email = item.Email, Role = item.Role, UserName = item.Name });
-            //foreach (var item in query.ToList().Distinct().Take(5))
-            //{
-            //    users.Add(new ApplicationUser(){UserName = item});
-            //}
             return View();
         }
 
