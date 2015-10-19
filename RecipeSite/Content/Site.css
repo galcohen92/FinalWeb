@@ -238,15 +238,17 @@ textarea{
     height:200px !important;
 }
 
-/*a.navLink {
-    color:blue !important;
-    font-weight: initial;
-
-    transition: color 2s;
+ul > li {
+    background-color:initial !important;
+    font-size: small;
+     transition: font-size background-color 2s;
 }
 
-a.navLink :hover{
-   color: red !important;
-}*/
+ul > li :hover{
+   background-color: darkgray !important;
+   font-size: x-large;
+}
+
+
 
 
