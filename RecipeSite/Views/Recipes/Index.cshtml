@@ -17,10 +17,10 @@
 
     @{Html.RenderAction("Search", "Recipes");}
 
-
-    <p>
-            @Html.ActionLink("Create New", "Create", "Recipes")
-    </p>
+    @if (User.Identity.IsAuthenticated) { 
+        <p>
+                @Html.ActionLink("Create New", "Create", "Recipes")
+        </p>
     }
 
     <div class="row">
