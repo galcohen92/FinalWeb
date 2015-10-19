@@ -18,8 +18,7 @@
             <small>@Html.DisplayFor(model => model.author.UserName) </small>    
         </h1>  
     </div>
-    <div class="row">
-      
+    <div class="row" >
         <div class="col-md-7 col-xs-5">
             @foreach (RecipeSite.Models.Category currentCategory in Model.Categories)
             {
@@ -28,7 +27,7 @@
             }
         </div>
         <div>
-            <span class="favorite" aria-hidden="true" onclick="addLike(@Model.ID)">
+            <span class="favorite" aria-hidden="true" style="width:30px;height:30px;" onclick="addLike(@Model.ID)">
                 <label id="fev_@Model.ID" style="padding-left:10px; padding-top:3px">@Html.DisplayFor(model => model.likeAmount)</label>
             </span>
         </div>
@@ -45,11 +44,10 @@
      <p>
          @Html.ActionLink("Back to List", "Index") |
  
-                 @if (User.Identity.IsAuthenticated && (User.IsInRole("Admins") || (User.Identity.GetUserId().Equals(Model.userId))))
+        @if (User.Identity.IsAuthenticated && (User.IsInRole("Admins") || (User.Identity.GetUserId().Equals(Model.userId))))
         {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) 
-             @Html.DisplayText("|")
-        @Html.ActionLink("Delete", "Delete", new { id = Model.ID })
+            <a href="@Url.Action("Edit", "Recipes", new { id = Model.ID })" class="btn btn-primary" role="button">edit</a>
+            <a href="@Url.Action("Delete", "Recipes", new { id = Model.ID })" class="btn btn-default" role="button">delete</a>
          }
     </p>
 

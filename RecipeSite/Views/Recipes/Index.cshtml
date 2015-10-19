@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<RecipeSite.Models.Recipe>
-
+@using Microsoft.AspNet.Identity
+          
 @{
     ViewBag.title = "recipes list";
 }
@@ -12,20 +13,23 @@
     <title>Index</title>
 </head>
 <body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create", "Recipes")
+        </p>
+    }
 
     <div class="row">
         @foreach (var item in Model)
         {
             <div class="col-sm-6 col-md-4" >
-                <div class="thumbnail" >
+                <div class="thumbnail" style="padding-bottom:10px;">
                     <h3>@Html.DisplayFor(modelItem => item.title)<small>@Html.DisplayFor(modelItem => item.author.UserName)</small></h3>
                     <a href="@Url.Action("Details", "Recipes", new { id = item.ID }) "><img src="@item.image" alt="no image" /></a>
                     <div class="caption">
                         <p>
-                            @if (User.IsInRole("Admins"))
+                            @if (User.Identity.IsAuthenticated && (User.IsInRole("Admins") || (User.Identity.GetUserId().Equals(item.userId))))
                             {
                                 <a href="@Url.Action("Edit", "Recipes", new { id = item.ID })" class="btn btn-primary" role="button">edit</a> <a href="@Url.Action("Delete", "Recipes", new { id = item.ID })" class="btn btn-default" role="button">delete</a>
                             }
@@ -57,7 +61,5 @@
             });
         }
     </script>
-    
-  
 </body>
 </html>

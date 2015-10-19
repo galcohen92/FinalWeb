@@ -45,9 +45,6 @@ namespace RecipeSite.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Recipe recipe = db.Recipes.Find(id);
-            //db.Entry(recipe)
-            //    .Collection(x => x.Categories)
-            //    .Load();
 
             if (recipe == null)
             {
@@ -94,8 +91,6 @@ namespace RecipeSite.Controllers
                     foreach (var currentCategoryId in categoriesId)
                     {
                         var categoryToAdd = db.Categories.Find(int.Parse(currentCategoryId.ToString()));
-
-                        //db.Categories.Attach(categoryToAdd);
                         recipe.Categories.Add(categoryToAdd);
                     }
                 }
@@ -112,7 +107,6 @@ namespace RecipeSite.Controllers
         // GET: Recipes/Edit/5
         public ActionResult Edit(int? id)
         {
-            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -134,12 +128,6 @@ namespace RecipeSite.Controllers
             {
                 idsArr = idsArr.Remove(idsArr.Length-1);
             }
-            //List<int> ids = recipe.Categories
-            //                        .Select(x => x.ID)
-            //                        .ToList();
-            ////ViewBag.selectedIdsList = recipe.Categories
-            //                        .Select(x => x.ID)
-            //                        .ToList(); 
             ViewBag.selectedIdsList = idsArr.ToString();
             return View(recipe);
         }
@@ -149,10 +137,23 @@ namespace RecipeSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,userId,title,content,image,likeAmount")] Recipe recipe, string selectedCategories)
+        public ActionResult Edit([Bind(Include = "ID,userId,title,content,image,likeAmount")] Recipe recipe, string selectedCategories, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    string imageName = System.IO.Path.GetFileName(upload.FileName);
+                    string imagePath = System.IO.Path.Combine(
+                       Server.MapPath("~/Upload/Images/recipes"), imageName);
+                    upload.SaveAs(imagePath);
+                    recipe.image = "/Upload/Images/recipes/" + imageName;
+                }
+                else
+                {
+                    recipe.image = db.Recipes.Find(recipe.ID).image;
+                }
+
                 if (selectedCategories != null && !selectedCategories.Equals(""))
                 {
                     db.Recipes.Find(recipe.ID).Categories.Clear();
