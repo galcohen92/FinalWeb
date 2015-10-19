@@ -158,9 +158,24 @@ textarea {
 
 .thumbnail img{
    height:250px;
-   width:305px;
+   width:200px;
+   max-height:100%;
+   max-width:100%;
 }
 
+#categoryThumbnailImg {
+       height:150px;
+   width:200px;
+   max-height:100%;
+   max-width:100%;
+}
+
+#recipeThumbnailImg {
+       height:100px;
+   width:175px;
+   max-height:100%;
+   max-width:100%;
+}
 
 .favorite {
 	     position: absolute; 
@@ -179,6 +194,8 @@ textarea {
     width: 100%;
 
 }
+
+
 
 /* Only affects 1600px width and higher */
 @media only screen and (min-width: 1600px){ nav {font-size: 36px; text-align:left;}}

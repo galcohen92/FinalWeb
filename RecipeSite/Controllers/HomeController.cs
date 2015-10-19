@@ -19,7 +19,6 @@ namespace RecipeSite.Controllers
             return View();
         }
 
-        // TODO - add empty option and make it default 
         public static MultiSelectList GetDropDown()
         {
             var categories = new ArrayList();

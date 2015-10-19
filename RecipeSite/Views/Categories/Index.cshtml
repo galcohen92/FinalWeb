@@ -22,24 +22,26 @@
     </p>
 }
 
-        <div class="row">
-    
+    <div class="row" style="display:flex; flex-wrap: wrap;">
+
         @foreach (var item in Model)
         {
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <a href="@Url.Action("IndexByCategory", "Recipes", new { categoryId = item.ID }) "><img src="@item.imageUrl" /></a>
-                        <div class="caption">
-                            <h3>@Html.DisplayFor(modelItem => item.name)</h3>
-                            @if (User.IsInRole("Admins"))
-                               {
-                           <p><a href="@Url.Action("edit","Categories", new { id=item.ID })" class="btn btn-primary" role="button">edit</a> <a href="@Url.Action("delete","Categories", new { id=item.ID })" class="btn btn-default" role="button">delete</a></p>
-                            }
-                        </div>
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <a href="@Url.Action("IndexByCategory", "Recipes", new { categoryId = item.ID }) "><img id="categoryThumbnailImg" src="@item.imageUrl" /></a>
+                    <div class="caption">
+                        <h3>@Html.DisplayFor(modelItem => item.name)</h3>
+                        @if (User.IsInRole("Admins"))
+                        {
+                            <p><a href="@Url.Action("edit","Categories", new { id=item.ID })" class="btn btn-primary" role="button">edit</a> <a href="@Url.Action("delete","Categories", new { id=item.ID })" class="btn btn-default" role="button">delete</a></p>
+                        }
                     </div>
                 </div>
-    }
-        </div>
+            </div>
+        }
+    </div>
+
+
     
 </body>
 </html>

@@ -107,6 +107,7 @@ namespace RecipeSite.Controllers
                 }
                 else
                 {
+                    //category.imageUrl = db.Categories.Find(category.ID).imageUrl;
                     category.imageUrl = "/Content/images/no-image.png";
                 }
                 db.Entry(category).State = EntityState.Modified;

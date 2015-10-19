@@ -177,8 +177,8 @@ namespace RecipeSite.Controllers
 
                 db.Recipes.Add(recipe);
                 db.SaveChanges();
-               
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Index", "Categories");
             }
             ViewBag.userId = new SelectList(db.Users, "ID", "firstName", recipe.userId);
             return View(recipe);
