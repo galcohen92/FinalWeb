@@ -69,20 +69,7 @@
                 @{Html.RenderAction("Aside", "Home");}
             
           
-            <div align="left" style="margin-right:20px"  role="search">
-                @using (Html.BeginForm("Search", "Home", FormMethod.Post))
-                {
-                    <p>
-                        <span iclass="glyphicon glyphicon-search" aria-hidden="true"></span>
-                        Title: @Html.TextBox("recipeTitle")
-                        UserName: @Html.TextBox("userName")
-                        Category: @Html.DropDownList("categories", RecipeSite.Controllers.HomeController.GetDropDown(), new { @class = "chzn-select", data_placeholder = "Choose  food categories..." })
-                        @*<input type="submit" class="glyphicon glyphicon-search" />*@
-                        <button type="submit" class="btn btn-default">Go!</button>
 
-                    </p>
-                }
-            </div>
 
             <div id="mainContent" class="col-md-9">
                 <section>

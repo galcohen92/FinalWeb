@@ -13,6 +13,14 @@ a{
 font-size:4em;
 }*/
 
+#canvasSection{
+    margin-top:20px;
+}
+#asideContent{
+        margin-left:20px;
+
+}
+
 #content {
 	display: table;
     width:100%;

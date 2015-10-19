@@ -31,6 +31,12 @@ namespace RecipeSite.Controllers
             }
         }
 
+        public ActionResult Search()
+        {
+            return View(); 
+        }
+
+
         public ActionResult IndexByCategory(int? categoryId)
         {
             var recipes = db.Categories.Find(categoryId).Recipes;

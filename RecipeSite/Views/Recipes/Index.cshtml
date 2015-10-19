@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<RecipeSite.Models.Recipe>
 @using Microsoft.AspNet.Identity
-          
+
 @{
     ViewBag.title = "recipes list";
 }
@@ -8,16 +8,19 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
 </head>
 <body>
-    @if (User.Identity.IsAuthenticated)
-    {
-        <p>
+
+    @{Html.RenderAction("Search", "Recipes");}
+
+
+    <p>
             @Html.ActionLink("Create New", "Create", "Recipes")
-        </p>
+    </p>
     }
 
     <div class="row">

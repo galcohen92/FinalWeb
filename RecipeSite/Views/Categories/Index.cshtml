@@ -12,6 +12,9 @@
     <title>Index</title>
 </head>
 <body>
+    @{Html.RenderAction("Search", "Recipes");}
+
+
 @if (User.IsInRole("Admins"))
                                {
     <p>
