@@ -13,48 +13,80 @@ a{
 font-size:4em;
 }*/
 
+#canvasSection{
+    margin-top:20px;
+}
+#asideContent{
+        margin-left:20px;
+
+}
+
 #content {
-	display: table;
+	display: flex;
     width:100%;
+     height: 100%;
 }
 
 	#mainContent {
 		display: table-cell;
-		/*width: 70%;*/
+		width: 60%;
 		padding-right: 22px;
          
 	}
+    #rightSide{
+        display: table-cell;
+		width: 20%;
+        float: right;
+
+		padding-right: 22px;
+    }
+    
+
 
 aside {
 		display: table-cell;
-		width: 30%;
-        background-color:lightgrey;
-      
+		width: 20%;
+         background-color:lightgrey;
+        height:500px;
 		/*background: url('../images/sidebar_background.png') top left;*/
+              /*-moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;*/
+  
+    overflow: visible;
+    /*margin:10px;*/
+    /*margin-bottom:10px;
+    margin-top:10px;*/
+
+        border-radius: 0px 50px 0px 0px;
+    border: 4px solid;
+    border-color: darkgray;
 	}
-footer {position: relative; bottom: 0;}
+footer {display:block; position: relative; bottom: 0;width:100%}
 
 /*------------------------------
 =SIDEBAR
 ------------------------------*/
 aside section {
-	margin: 11px 0 0 11px;
-	padding: 6px 11px;
+	/*margin: 11px 0 0 11px;*/
+	/*padding: 6px 11px;*/
 	/*background: url('../images/sidebar_section_background.png') repeat-x;*/
 	
 	/* Border-radius not implemented yet */
 	-moz-border-radius: 11px;
 	-webkit-border-radius: 11px;
+    /*height:initial;*/
 }
 
+
 	aside section ul {
-		margin: 0 0 0 22px;
+		/*margin: 0 0 0 22px;*/
 		list-style: none;
 
 	}
 	
 		aside section ul li a {
-			display: block;
+			/*display: block;*/
 			text-decoration: none;
 			color: #000;
 		}
@@ -64,8 +96,15 @@ aside section {
                 
 			}
 
+      
+            /*canvas{
+            
+                margin:auto;
+    border: 1px solid #ddd;
 
-
+    
+    align-self:center
+            }*/
 
 /* Styles for basic forms
 -----------------------------------------------------------*/
@@ -119,19 +158,114 @@ textarea {
 
 .thumbnail img{
    height:250px;
-   width:305px;
+   width:200px;
+   max-height:100%;
+   max-width:100%;
 }
 
+#categoryThumbnailImg {
+       height:150px;
+   width:200px;
+   max-height:100%;
+   max-width:100%;
+}
+
+#recipeThumbnailImg {
+       height:100px;
+   width:175px;
+   max-height:100%;
+   max-width:100%;
+}
+
+.favorite {
+	     position: absolute; 
+    /* left: 0; */
+    /* width: 100%; */
+    background: url("images/Heart_icon_red_hollow.png");
+    background-repeat: no-repeat;
+    /* top: 1px; */
+    /* display: block; */
+    /* font-family: 'Glyphicons Halflings'; */
+    font-style: normal;
+    font-weight: 400;
+    /* line-height: 1; */
+    /* -webkit-font-smoothing: antialiased; */
+    height: 100%;
+    width: 100%;
+
+}
+
+
+
 /* Only affects 1600px width and higher */
-@media only screen and (min-width: 1600px){ nav { font-size: 36px; }}
-/* Only affects 1200px-1600px width */
-@media only screen and (max-width: 1600px){ nav { font-size: 24px; }}
+@media only screen and (min-width: 1600px){ nav {font-size: 36px; text-align:left;}}
+/*@media only screen and (min-width: 1600px){ body {font-size: 24px; text-align:left;}}*/
+
 /* Only affects 900px-1200px width */
-@media only screen and (max-width: 1200px){ nav { font-size: 12px; }}
+@media only screen and (max-width: 1200px){ nav { font-size: 12px; text-align:left;}}
+/*@media only screen and (min-width: 1200px){ body {font-size: 12px; text-align:left;}}*/
 /* Only affects 600px-900px width */
-@media only screen and (max-width: 900px){ nav { font-size: 12px; }}
+@media only screen and (max-width: 900px){ nav { font-size: 12px;text-align:left; }}
+/*@media only screen and (min-width: 900px){ body {font-size: 12px; text-align:left;}}*/
 /* Only affects 400-600px width */
-@media only screen and (max-width: 600px){ nav { font-size: 12px; }}
+@media only screen and (max-width: 600px){ nav { font-size: 12px;text-align:left; }}
+/*@media only screen and (min-width: 600px){ body {font-size: 12px; text-align:left;}}*/
 /* Only affects 400px width and lower */
-@media only screen and (max-width: 400px){ nav { font-size: 12px; }}
+@media only screen and (max-width: 400px){ nav { font-size: 12px;text-align:left; }}
+/*@media only screen and (min-width: 400px){ body {font-size: 12px; text-align:left;}}*/
+
+dl {
+    float: left;
+  width: 100%;
+  overflow: hidden;
+  text-align:left;
+ 
+  margin: 10px
+}
+
+dt{
+    text-align:left;
+     padding: 5px;
+}
+
+dd{
+      text-align:left;
+      padding: 5px;
+}
+
+@font-face {
+    font-family: artifika;
+    src: url(Fonts/Artifika-Regular.ttf);
+}
+
+.welcome{
+    color: cornflowerblue;
+    text-shadow: 2px 3px #286090;
+    font-family: artifika;
+}
+
+.caloriesFacts{
+    -webkit-column-count: 3;
+    -webkit-column-rule-style: dotted;
+    -webkit-column-rule-color:gray;
+}
+
+textarea{
+    overflow-y: scroll;
+    height:200px !important;
+}
+
+ul > li {
+    background-color:initial !important;
+    font-size: small;
+     transition: font-size background-color 2s;
+}
+
+ul > li :hover{
+   background-color: darkgray !important;
+   font-size: x-large;
+}
+
+
+
 

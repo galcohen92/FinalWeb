@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -9,9 +10,12 @@ namespace RecipeSite.Models
     {
         public int ID { get; set; }
 
+        [Required]
         public String name { get; set; }
 
         public String imageUrl { get; set; }
+
+        public virtual ICollection<Recipe> Recipes { get; set; }
 
         public Category(){}
 
@@ -21,5 +25,4 @@ namespace RecipeSite.Models
             this.name = name;
         }
     }
-
 }

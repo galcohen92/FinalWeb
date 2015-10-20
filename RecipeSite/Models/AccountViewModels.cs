@@ -17,6 +17,36 @@ namespace RecipeSite.Models
         public string ReturnUrl { get; set; }
     }
 
+    public class UserRoleView
+    {
+        [Key]
+        [Required]
+        [EmailAddress]
+        [Display(Name = "UserID")]
+        public string UserID { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+
+        [Display(Name = "User name")]
+        [Required]
+        [StringLength(15)]
+        public String UserName { get; set; }
+
+        [Display(Name = "Role")]
+        [Required]
+        [StringLength(15)]
+        public String Role { get; set; }
+
+        public UserRoleView()
+        {
+
+        }
+    }
+
     public class ManageUserViewModel
     {
         [Required]
@@ -96,6 +126,11 @@ namespace RecipeSite.Models
         [StringLength(40)]
         public String address { get; set; }
 
+
+        public RegisterViewModel()
+        {
+            this.birthDate = DateTime.Now;
+        }
         //[DataType(DataType.EmailAddress)]
         //[Required]
         //public String email { get; set; }

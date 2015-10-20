@@ -1,4 +1,5 @@
 ﻿@model RecipeSite.Models.Recipe
+           @using Microsoft.AspNet.Identity
 
 @{
     ViewBag.title = "Recipe details";
@@ -12,57 +13,63 @@
     <title>Details</title>
 </head>
 <body>
-    <div>
-        <h4>Recipe</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.author.UserName)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.author.UserName)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.title)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.title)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.content)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.content)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.image)
-            </dt>
-    
-            <dd>
-                <video src="~/Upload/Videos/recipes/yyy.mp4"></video>
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.likeAmount)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.likeAmount)
-            </dd>
-    
-        </dl>
+    <div class="row">
+        <h1>@Html.DisplayFor(model => model.title)
+            <small>@Html.DisplayFor(model => model.author.UserName) </small>    
+        </h1>  
     </div>
-    <p>
-        <video src="~/Upload/Videos/recipes/yyy.mp4"></video>
+    <div class="row" >
+        <div class="col-md-7 col-xs-5">
+            @foreach (RecipeSite.Models.Category currentCategory in Model.Categories)
+            {
+               <label>@currentCategory.name
+                        |</label>
+            }
+        </div>
+        <div>
+            <span class="favorite" aria-hidden="true" style="width:30px;height:30px;" onclick="addLike(@Model.ID)">
+                <label id="fev_@Model.ID" style="padding-left:10px; padding-top:3px">@Html.DisplayFor(model => model.likeAmount)</label>
+            </span>
+        </div>
+        
+    </div>
 
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-        @Html.ActionLink("Back to List", "Index")
+     <hr />
+
+    <div class="row">
+        <img class="col-md-5 col-xs-4" src="@Html.DisplayFor(model => model.image)" alt="...">
+        @Html.DisplayFor(model => model.content)
+    </div>
+   
+     <p>
+         @Html.ActionLink("Back to List", "Index") |
+ 
+        @if (User.Identity.IsAuthenticated && (User.IsInRole("Admins") || (User.Identity.GetUserId().Equals(Model.userId))))
+        {
+            <a href="@Url.Action("Edit", "Recipes", new { id = Model.ID })" class="btn btn-primary" role="button">edit</a>
+            <a href="@Url.Action("Delete", "Recipes", new { id = Model.ID })" class="btn btn-default" role="button">delete</a>
+         }
     </p>
+
+    <script type="text/javascript">
+
+        function addLike(resId) {
+            $.ajax({
+                type: "post",
+                url: '/Recipes/AddLike',
+                data: { "id": resId, "actionName": "Details" },
+                cache: false,
+                success: function () {
+                    var itId= "#fev_" + resId;
+                    var calc = Number($(itId).text()) + 1;
+                    $(itId).text(calc);
+                },
+                error: function() {
+                    alert('error');
+                }
+            });
+        }
+    </script>
 </body>
 </html>
+

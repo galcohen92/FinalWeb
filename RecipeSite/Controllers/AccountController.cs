@@ -12,6 +12,8 @@ using Microsoft.Owin.Security;
 using Owin;
 using RecipeSite.Models;
 using RecipeSite.DAL;
+using System.Net;
+using System.Collections;
 
 namespace RecipeSite.Controllers
 {
@@ -19,18 +21,127 @@ namespace RecipeSite.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
-         private ApplicationDbContext db = new ApplicationDbContext();
+        private static ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
         }
 
-        [Authorize(Roles = "admin")]
-        // GET: Recipes
+        [Authorize(Roles = "Admins")]
         public ActionResult Index()
         {
+            IList<UserRoleView> users = new List<UserRoleView>();
+         
+            // Join of users and role tables - get the users with their roles
+            var query = from u in db.Users
+                        from ur in u.Roles
+                        join r in db.Roles on ur.RoleId equals r.Id
+                        select new
+                        {
+                            u.Id,
+                            Name = u.UserName,
+                            Role = r.Name,
+                            Email = u.Email
+                        };
 
-            return View(db.Users.ToList());
+            foreach (var item in query.ToList())
+            {
+                users.Add(new UserRoleView(){UserID = item.Id, Email = item.Email, Role = item.Role, UserName = item.Name});
+            }
+
+            return View(users.ToList());
+        }
+
+        public static SelectList GetDropDown()
+        {
+            var roles = new ArrayList();
+            roles.Add(new
+            {
+                roleId = -1,
+                roleName = String.Empty
+            });
+
+            roles.AddRange(db.Roles.Select(c => new
+            {
+                roleId = c.Id,
+                roleName = c.Name
+            }).ToList());
+
+            return new SelectList(roles, "roleId", "roleName");
+        }
+
+        public ActionResult Search(string roleId, string userName, string email)
+        {
+            var users = from m in db.Users
+                        select m;
+
+            if (!String.IsNullOrEmpty(userName))
+            {
+                users = users.Where(s => s.UserName.Contains(userName));
+            }
+
+            if (!String.IsNullOrEmpty(email))
+            {
+                users = users.Where(s => s.Email.Contains(email));
+            }
+
+            if (!roleId.Equals("-1"))
+            {
+                users = users.Where(s => s.Roles.Any(x => x.RoleId == roleId));
+            }
+
+            List<UserRoleView> usersList = new List<UserRoleView>();
+            foreach (var item in users.ToList())
+            {
+                foreach(var roleItem in item.Roles.ToList())
+                {
+                    usersList.Add(new UserRoleView() { UserID = item.Id, Email = item.Email, Role = db.Roles.Find(roleItem.RoleId).Name, UserName = item.UserName });
+
+                }
+            }
+
+            return View("../Account/Index", usersList.ToList());
+        }
+
+        // GET: Account/Delete/5
+        public ActionResult Delete(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        // POST: Account/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string id)
+        {
+            ApplicationUser user = db.Users.Find(id);
+            db.Users.Remove(user);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        // GET: Account/Details/5
+        public ActionResult Details(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
         }
 
         public AccountController(ApplicationUserManager userManager)
@@ -106,10 +217,14 @@ namespace RecipeSite.Controllers
                     Email = model.Email, UserName = model.UserName,BirthDate = model.birthDate,
                     Country = model.country, City = model.city, Address = model.address};
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+                var store = new UserStore<ApplicationUser>(db);
+                var manager = new UserManager<ApplicationUser>(store);
+
                 if (result.Succeeded)
                 {
                     await SignInAsync(user, isPersistent: false);
-
+                    manager.AddToRole(user.Id, "Users");
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

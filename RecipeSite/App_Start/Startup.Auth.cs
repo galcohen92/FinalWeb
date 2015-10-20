@@ -47,9 +47,9 @@ namespace RecipeSite
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "818834374895942",
+               appSecret: "31557e5d20f01d998949433eb7a97ae3");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{

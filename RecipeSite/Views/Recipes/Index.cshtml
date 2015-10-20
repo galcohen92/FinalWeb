@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<RecipeSite.Models.Recipe>
+@using Microsoft.AspNet.Identity
 
 @{
     ViewBag.title = "recipes list";
@@ -7,59 +8,63 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
 </head>
 <body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.author.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.content)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.image)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.likeAmount)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.author.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.likeAmount)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-            </td>
-        </tr>
+
+    @{Html.RenderAction("Search", "Recipes");}
+
+    @if (User.Identity.IsAuthenticated) { 
+        <p>
+                @Html.ActionLink("Create New", "Create", "Recipes")
+        </p>
     }
-    
-    </table>
+
+    <div class="row" style="display:flex; flex-wrap: wrap;">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail" >
+                    <h3>@Html.DisplayFor(modelItem => item.title)<small>@Html.DisplayFor(modelItem => item.author.UserName)</small></h3>
+                    <a href="@Url.Action("Details", "Recipes", new { id = item.ID }) "><img id="recipeThumbnailImg" src="@item.image" alt="no image" /></a>
+                    <div class="caption" style="margin:10px">
+                        <p>
+                            @if (User.Identity.IsAuthenticated && (User.IsInRole("Admins") || (User.Identity.GetUserId().Equals(item.userId))))
+                            {
+                                <a href="@Url.Action("Edit", "Recipes", new { id = item.ID })" class="btn btn-primary" role="button">edit</a> <a href="@Url.Action("Delete", "Recipes", new { id = item.ID })" class="btn btn-default" role="button">delete</a>
+                            }
+                            <span style="width:30px;height:30px;align-items:flex-end" class="favorite" aria-hidden="true" onclick="addLike(@item.ID)">
+                                <label id="fev_@item.ID" style="padding-left:10px; padding-top:3px">@Html.DisplayFor(modelItem => item.likeAmount)</label>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @* ajax use for increase the likes count *@
+    <script type="text/javascript">
+
+        function addLike(resId) {
+            $.ajax({
+                type: "post",
+                url: '/Recipes/AddLike',
+                data: { "id": resId, "actionName": "Index" },
+                cache: false,
+                success: function () {
+                    var itId= "#fev_" + resId;
+                    var calc = Number($(itId).text()) + 1;
+                    $(itId).text(calc);
+                },
+                error: function() {
+                    alert('error');
+                }
+            });
+        }
+    </script>
 </body>
 </html>

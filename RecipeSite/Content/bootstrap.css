@@ -1409,8 +1409,8 @@ a.bg-danger:focus {
   background-color: #e4b9b9;
 }
 .page-header {
-  padding-bottom: 9px;
-  margin: 40px 0 20px;
+  padding-bottom: 0px;
+  margin: 50px 0 10px;
   border-bottom: 1px solid #eee;
 }
 ul,
@@ -5847,7 +5847,8 @@ button.list-group-item-danger.active:focus {
 .embed-responsive iframe,
 .embed-responsive embed,
 .embed-responsive object,
-.embed-responsive video {
+.embed-responsive 
+ {
   position: absolute;
   top: 0;
   bottom: 0;
