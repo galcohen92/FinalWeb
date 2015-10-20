@@ -31,6 +31,8 @@ namespace RecipeSite.Controllers
         public ActionResult Index()
         {
             IList<UserRoleView> users = new List<UserRoleView>();
+         
+            // Join of users and role tables - get the users with their roles
             var query = from u in db.Users
                         from ur in u.Roles
                         join r in db.Roles on ur.RoleId equals r.Id
@@ -41,7 +43,7 @@ namespace RecipeSite.Controllers
                             Role = r.Name,
                             Email = u.Email
                         };
-            //var UserRole = db.Users.Join(db.Roles, u => u.Id, r => r, new UserRoleView() { UserID = item.Id, Email = item.Email, Role = item.Role, UserName = item.Name });
+
             foreach (var item in query.ToList())
             {
                 users.Add(new UserRoleView(){UserID = item.Id, Email = item.Email, Role = item.Role, UserName = item.Name});

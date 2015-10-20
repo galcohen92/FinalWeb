@@ -38,13 +38,6 @@ namespace RecipeSite.Controllers
         {
             string ApiUrl = "https://api.nutritionix.com/v1_1/search/" + name + "?fields="
             + "item_name%2Cnf_calories%2Cnf_total_fat&appId=" + Globals.APP_ID + "&appKey=" + Globals.APP_KEY;
-            //using (var client = new WebClient())
-            //{
-            //    client.Headers[HttpRequestHeader.ContentType] = "application/json";
-            //    byte[] data = Encoding.Default.GetBytes(name);
-            //    byte[] result = client.UploadData(ApiUrl, "GET", data);
-            //    return Content(Encoding.Default.GetString(result), "application/json");
-            //}
 
             System.Net.WebRequest req = System.Net.WebRequest.Create(ApiUrl);
             //req.Proxy = new System.Net.WebProxy(ProxyString, true); //true means no proxy
@@ -64,24 +57,7 @@ namespace RecipeSite.Controllers
                     i = new Ingredient();
                 }
 
-                
-
-            //using (var client = new HttpClient())
-            //{
-            //    client.BaseAddress = new Uri("http://localhost:9000/");
-            //    client.DefaultRequestHeaders.Accept.Clear();
-            //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            //    // New code:
-            //    HttpResponseMessage response = await client.GetAsync("api/products/1");
-            //    if (response.IsSuccessStatusCode)
-            //    {
-            //        Product product = await response.Content.ReadAsAsync>Product>();
-            //        Console.WriteLine("{0}\t${1}\t{2}", product.Name, product.Price, product.Category);
-            //    }
-            //}
             return RedirectToAction("RefreshCreate", new { name = i.Name, calories = i.Calories, fat = i.Fat });
-            //return RedirectToAction("Create", new {ingredient = i });
         }
 
         // GET: Ingredients/Details/5

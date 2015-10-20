@@ -86,12 +86,13 @@ namespace RecipeSite.Controllers
 
             IList<ApplicationUser> users = new List<ApplicationUser>();
 
+            // join and groupBy of users and recipes tables - Get the top 5 users with the highes num of recipes in the sites. The query also group by the user id in order to count the recipes for every user
             var query = from r in db.Recipes
                         group r by r.userId into m
                         join u in db.Users on m.Key equals u.Id
                         orderby m.Count() descending
                         select u.UserName;
-            //var UserRole = db.Users.Join(db.Roles, u => u.Id, r => r, new UserRoleView() { UserID = item.Id, Email = item.Email, Role = item.Role, UserName = item.Name });
+
             foreach (var item in query.ToList().Distinct().Take(5))
             {
                 users.Add(new ApplicationUser() { UserName = item });

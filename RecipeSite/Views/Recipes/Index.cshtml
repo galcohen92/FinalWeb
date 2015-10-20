@@ -30,13 +30,13 @@
                 <div class="thumbnail" >
                     <h3>@Html.DisplayFor(modelItem => item.title)<small>@Html.DisplayFor(modelItem => item.author.UserName)</small></h3>
                     <a href="@Url.Action("Details", "Recipes", new { id = item.ID }) "><img id="recipeThumbnailImg" src="@item.image" alt="no image" /></a>
-                    <div class="caption" style="margin-top:10px;">
+                    <div class="caption" style="margin:10px">
                         <p>
                             @if (User.Identity.IsAuthenticated && (User.IsInRole("Admins") || (User.Identity.GetUserId().Equals(item.userId))))
                             {
                                 <a href="@Url.Action("Edit", "Recipes", new { id = item.ID })" class="btn btn-primary" role="button">edit</a> <a href="@Url.Action("Delete", "Recipes", new { id = item.ID })" class="btn btn-default" role="button">delete</a>
                             }
-                            <span style="width:30px;height:30px;" class="favorite" aria-hidden="true" onclick="addLike(@item.ID)">
+                            <span style="width:30px;height:30px;align-items:flex-end" class="favorite" aria-hidden="true" onclick="addLike(@item.ID)">
                                 <label id="fev_@item.ID" style="padding-left:10px; padding-top:3px">@Html.DisplayFor(modelItem => item.likeAmount)</label>
                             </span>
                         </p>
@@ -45,6 +45,8 @@
             </div>
         }
     </div>
+
+    @* ajax use for increase the likes count *@
     <script type="text/javascript">
 
         function addLike(resId) {

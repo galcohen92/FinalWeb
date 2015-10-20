@@ -6,16 +6,6 @@ using System.Web;
 
 namespace RecipeSite.Models
 {
-    //    public enum AmountType
-    //    {
-    //        KILOGRAM,
-    //        GRAM,
-    //        LITER,
-    //        BOTTLE,
-    //        BOX,
-    //        KORT,
-    //        SPOON
-    //    }
 
     public class Ingredient
     {

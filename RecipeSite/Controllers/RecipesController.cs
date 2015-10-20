@@ -103,7 +103,7 @@ namespace RecipeSite.Controllers
 
                 db.Recipes.Add(recipe);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Categories");
             }
 
             ViewBag.userId = new SelectList(db.Users, "ID", "firstName", recipe.userId);
@@ -207,7 +207,7 @@ namespace RecipeSite.Controllers
             Recipe recipe = db.Recipes.Find(id);
             db.Recipes.Remove(recipe);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Categories");
         }
 
         // POST: Recipes/Edit/5

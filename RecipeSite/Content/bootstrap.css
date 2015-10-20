@@ -5847,7 +5847,8 @@ button.list-group-item-danger.active:focus {
 .embed-responsive iframe,
 .embed-responsive embed,
 .embed-responsive object,
-.embed-responsive video {
+.embed-responsive 
+ {
   position: absolute;
   top: 0;
   bottom: 0;
